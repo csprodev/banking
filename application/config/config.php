@@ -22,7 +22,13 @@
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+if(php_sapi_name() != 'cli')
+{
+  $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+  $config['base_url']	= $protocol.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+}
+else
+  $config['base_url']	= '';
 
 /*
 |--------------------------------------------------------------------------
@@ -232,7 +238,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'ibs_branchless';
 
 /*
 |--------------------------------------------------------------------------
@@ -254,8 +260,8 @@ $config['encryption_key'] = '';
 */
 $config['sess_cookie_name']		= 'ci_session';
 $config['sess_expiration']		= 7200;
-$config['sess_expire_on_close']	= FALSE;
-$config['sess_encrypt_cookie']	= FALSE;
+$config['sess_expire_on_close']	= TRUE;
+$config['sess_encrypt_cookie']	= TRUE;
 $config['sess_use_database']	= FALSE;
 $config['sess_table_name']		= 'ci_sessions';
 $config['sess_match_ip']		= FALSE;
@@ -302,8 +308,8 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_expire' = The number in seconds the token should expire.
 */
 $config['csrf_protection'] = FALSE;
-$config['csrf_token_name'] = 'csrf_test_name';
-$config['csrf_cookie_name'] = 'csrf_cookie_name';
+$config['csrf_token_name'] = 'csrf_ibs';
+$config['csrf_cookie_name'] = 'csrf_ibs';
 $config['csrf_expire'] = 7200;
 
 /*
