@@ -28,12 +28,15 @@ class Login extends CI_Controller {
 				set_cookie($cookie);
 			}
 
+			$this->session->unset_userdata('err_msg');
 			$this->session->set_userdata('user',$user->usr_id);
 			
 			redirect();
 		}
-		else
+		else {
 			$this->session->set_userdata('err_msg','Login and password combination is invalid.');
+			redirect();
+		}
 		
 	}
 }
