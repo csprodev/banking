@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') OR EXIT('No direct script access allowed');
-/**
-*
-*/
+
 class UserDB extends CI_Model {
 
 	public function __construct()
@@ -27,7 +25,8 @@ class UserDB extends CI_Model {
 		$this->db->where('usr_name',$post['username']);
 		$this->db->where('usr_password',md5($post['password'].SALT));
 		$this->db->where('status','active');
-		$res = $this->db->get('users');	//print_r($this->db->last_query());die();
+		$res = $this->db->get('users');	
+		//print_r($this->db->last_query());die();
 		if($res->num_rows() > 0)
 		{
 			$row = $res->row();

@@ -13,7 +13,12 @@ class Index extends CI_Controller {
 
 	public function index()
 	{
-		$data['userdata'] = $this->userdb->getLoginInfo($this->session->userdata('user'));
+		$userdata = $this->userdb->getLoginInfo($this->session->userdata('user'));
+		$data = array(
+			'link' => 'home_view.php',
+			'userdata' => $userdata
+		);
+		
 		$this->load->view('index_view', $data);
 	}
 	
