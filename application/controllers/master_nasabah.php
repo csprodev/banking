@@ -7,6 +7,7 @@ class Master_nasabah extends CI_Controller
     {
         parent::__construct();
         $this->load->model('userdb');
+        $this->load->model('master_nasabah_model', 'get_db');
     }
 
 	public function index()
@@ -18,6 +19,15 @@ class Master_nasabah extends CI_Controller
 		);
 
 		$this->load->view('index_view', $data);
+	}
+
+	public function save()
+	{
+		$data = $this->input->post();
+
+		$save = $this->get_db->do_save($data);
+
+		echo $save;
 	}
 
 }
