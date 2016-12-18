@@ -298,6 +298,8 @@
           <a href="#">
             <i class="fa fa-book"></i>
             <span>Registrasi</span>
+            <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
             <li><a href="<?php echo base_url(); ?>master_nasabah"><i class="fa fa-circle-o"></i>Master Nasabah</a></li>
