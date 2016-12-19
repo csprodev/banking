@@ -15,15 +15,9 @@
 
   <!-- SELECT2 EXAMPLE -->
   <div class="box box-default">
-    <div class="box-header with-border">
-      <div class="box-tools pull-right">
-        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
-      </div>
-    </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <form action="<?php echo base_url(); ?>master_nasabah/save" method="post">
+      <form id="dischargeform" action="<?php echo base_url(); ?>master_nasabah/save" method="post">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -55,11 +49,11 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>No Alternatif</label>
-              <input type="text" name="mn_no_alternatif" class="form-control">
+              <input type="text" name="mn_no_alternatif" class="form-control" >
             </div>
             <div class="form-group">
               <label>Nama Alias</label>
-              <input type="text" name="mn_nama_alias" class="form-control">
+              <input type="text" name="mn_nama_alias" class="form-control" >
             </div>
 
             <div class="form-group">
@@ -90,7 +84,7 @@
             </div>
             <div class="form-group">
               <label>Tempat Lahir</label>
-              <input type="text" name="mn_tempat_lahir" class="form-control">
+              <input type="text" name="mn_tempat_lahir" class="form-control" >
             </div>
             <div class="form-group">
               <label>Tanggal Lahir</label>
@@ -107,8 +101,8 @@
           <!-- /.col -->
         </div>
         <div class="box-footer">
-          <button type="submit" class="btn btn-primary">Simpan Registrasi Nasabah</button>
-          <button type="submit" class="btn btn-danger">Batalkan Registrasi</button>
+          <button type="submit" class="btn btn-primary" style="margin-left:-9px">Simpan Registrasi Nasabah</button>
+          <!-- <button type="button" class="btn btn-danger">Batalkan Registrasi</button> -->
         </div>
       </form>
       <!-- /.row -->
@@ -119,12 +113,49 @@
   </div>
   <!-- /.box -->
 </section>
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h3 id="myModalLabel3">Konfirmasi</h3>
+      </div>
+      <div class="modal-body">
+        <p>Apakah anda yakin ingin menyimpan data nasabah ini?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Tidak</button>
+        <button class="btn-primary btn" id="SubForm">Iya</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script>
   $(function () {
     //Date picker
     $('#datepicker').datepicker({
       autoclose: true
+    });
+
+    $("#dischargeform").validate({
+      rules: {
+          mn_id_nasabah: "required",
+          mn_nama_nasabah: "required",
+      },
+      messages: {
+          mn_id_nasabah: "id nasabah masih kosong",
+          mn_nama_nasabah: "nama nasabah masih kosong",
+      },
+      submitHandler: function (form) {
+          $("#myModal").modal('show');
+          $('#SubForm').click(function () {
+              form.submit();
+         });
+      }
     });
   });
 </script>

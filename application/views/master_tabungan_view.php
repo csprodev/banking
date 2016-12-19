@@ -29,7 +29,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>No Rekening</label>
-              <input type="text" name="mt_no_rekening" class="form-control">
+              <input type="text" name="mt_no_rekening" class="form-control" required>
             </div>
             <div class="form-group">
               <label>ID Nasabah</label>
@@ -100,7 +100,7 @@
         </div>
         <div class="box-footer">
           <button type="submit" class="btn btn-primary">Simpan Registrasi</button>
-          <button type="submit" class="btn btn-danger">Batal Registrasi</button>
+          <button type="button" class="btn btn-danger">Batal Registrasi</button>
         </div>
       </form>
     </div>
