@@ -27,7 +27,7 @@ class Master_nasabah extends CI_Controller
 
 		$save = $this->get_db->do_save($data);
 
-		echo $save;
+		redirect("master_nasabah");
 	}
 
 }

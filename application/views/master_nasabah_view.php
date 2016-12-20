@@ -154,6 +154,7 @@
           $("#myModal").modal('show');
           $('#SubForm').click(function () {
               form.submit();
+              alert('succes save');
          });
       }
     });
