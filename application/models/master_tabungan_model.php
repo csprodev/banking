@@ -8,10 +8,16 @@ class Master_tabungan_model extends CI_Model
         parent::__construct();
     }
 
+	public function do_read()
+	{
+		return $this->db->get('master_tabungan')->result_array();
+	}
+
 	public function do_save($data)
 	{
 		return $this->db->insert('master_tabungan',$data);
 	}
+
 
 }
 

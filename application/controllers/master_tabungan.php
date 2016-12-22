@@ -24,6 +24,20 @@ class Master_tabungan extends CI_Controller
 		$this->load->view('index_view', $data);
 	}
 
+	public function list_data()
+	{
+		$list_data = $this->get_db->do_read();
+		$userdata = $this->userdb->getLoginInfo($this->session->userdata('user'));
+
+		$data = array(
+			'link' => 'master_tabungan_list_view.php',
+			'userdata' => $userdata,
+			'list_data' => $list_data
+		);
+
+		$this->load->view('index_view', $data);
+	}
+
 	public function save()
 	{
 		$data = $this->input->post();
@@ -31,6 +45,11 @@ class Master_tabungan extends CI_Controller
 		$save = $this->get_db->do_save($data);
 
 		echo $save;
+	}
+
+	public function delete()
+	{
+		echo 'ahay';
 	}
 
 }
