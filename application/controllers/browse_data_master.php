@@ -7,7 +7,8 @@ class Browse_data_master extends CI_Controller {
         parent::__construct();
 
         $this->load->model('userdb');
-		$this->load->model('master_tabungan_model');
+		$this->load->model('master_tabungan_model','tabungandb');
+		$this->load->model('master_kredit_model','kreditdb');
         if($this->session->userdata('user') == '') {
         	redirect('login');
         }
@@ -21,11 +22,11 @@ class Browse_data_master extends CI_Controller {
 	public function tabungan()
 	{
 		$userdata= $this->userdb->getLoginInfo($this->session->userdata('user'));
-		$data_tabungan = $this->master_tabungan_model->gets();
+		$data_tabungan = $this->tabungandb->gets();
 		$saldo = [];
 		foreach($data_tabungan as $k=>$val) {
-			$data_saldo_setor = $this->master_tabungan_model->get_saldo_setor($val->mt_no_rekening);
-			$data_saldo_tarik = $this->master_tabungan_model->get_saldo_tarik($val->mt_no_rekening);
+			$data_saldo_setor = $this->tabungandb->get_saldo_setor($val->mt_no_rekening);
+			$data_saldo_tarik = $this->tabungandb->get_saldo_tarik($val->mt_no_rekening);
 
 			array_push($saldo, $data_saldo_setor - $data_saldo_tarik);
 			
@@ -45,11 +46,12 @@ class Browse_data_master extends CI_Controller {
 	public function kredit()
 	{
 		$userdata= $this->userdb->getLoginInfo($this->session->userdata('user'));
-		$data_kredit = $this->master_tabungan_model->gets();
+		$data_kredit = $this->kreditdb->gets();
 
 		$data = array(
 			'link' => 'kredit_view.php',
-			'userdata' => $userdata
+			'userdata' => $userdata,
+			'data_kredit' => $data_kredit
 		);
 		$this->load->view('index_view', $data);
 	}
@@ -59,7 +61,7 @@ class Browse_data_master extends CI_Controller {
 		$post = $_POST;
 		$cek_remember_token = $this->cek_remember_token();
 		if($cek_remember_token != null)
-			$this->master_tabungan_model->insert_setor($post);
+			$this->tabungandb->insert_setor($post);
 		redirect('browse_data_master/tabungan');
 	}
 
@@ -68,7 +70,7 @@ class Browse_data_master extends CI_Controller {
 		$post = $_POST;
 		$cek_remember_token = $this->cek_remember_token();
 		if($cek_remember_token != null)
-			$this->master_tabungan_model->insert_tarik($post);
+			$this->tabungandb->insert_tarik($post);
 		redirect('browse_data_master/tabungan');
 	}
 
