@@ -32,12 +32,13 @@ class Browse_data_master extends CI_Controller {
 			
 		}
 		
-		// print_r($saldo);die();
+		$menu = array('browse_data_master','tabungan');
 		$data = array(
 			'link' => 'tabungan_view.php',
 			'userdata' => $userdata,
 			'data_tabungan' => $data_tabungan,
-			'saldo' => $saldo
+			'saldo' => $saldo,
+			'menu' => $menu
 		);
 		
 		$this->load->view('index_view', $data);
@@ -48,10 +49,12 @@ class Browse_data_master extends CI_Controller {
 		$userdata= $this->userdb->getLoginInfo($this->session->userdata('user'));
 		$data_kredit = $this->kreditdb->gets();
 
+		$menu = array('browse_data_master','kredit');
 		$data = array(
 			'link' => 'kredit_view.php',
 			'userdata' => $userdata,
-			'data_kredit' => $data_kredit
+			'data_kredit' => $data_kredit,
+			'menu' => $menu
 		);
 		$this->load->view('index_view', $data);
 	}

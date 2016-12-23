@@ -77,9 +77,13 @@
                           <div class="form-group">
                             <label for="no_rekening_kredit">No. Rekening</label>
                             <input type="text" class="form-control" id="no_rekening_kredit" name="no_rekening_kredit" disabled value="">
-                            <label for="nominal_angsuran">Nominal Angsuran</label>
-                            <input type="text" class="form-control" id="nominal_angsuran" name="nominal_angsuran" disabled value="">
                             <input type="hidden" class="form-control" id="mk_no_rekening_kredit" name="mk_no_rekening_kredit">
+                            
+                            <label for="nominal_pokok">Pokok</label>
+                            <input type="text" class="form-control" id="nominal_pokok" name="nominal_pokok" disabled value="">
+                            <label for="nominal_pokok">Pokok</label>
+                            <input type="text" class="form-control" id="nominal_pokok" name="nominal_pokok" disabled value="">
+                            
                             
                           </div>
                         </div>

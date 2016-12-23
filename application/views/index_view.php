@@ -293,7 +293,7 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="active menu_dashboard"><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i><span>Dashboard</a></li>
+        <li class="active dashboard"><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i><span>Dashboard</a></li>
         <li class="treeview" id="">
           <a href="#">
             <i class="fa fa-book"></i>
@@ -310,15 +310,15 @@
             <li><a href="<?php echo base_url(); ?>master_kredit/list_data"><i class="fa fa-circle-o"></i>List Master Kredit</a></li>
           </ul>
         </li>
-        <li class="treeview menu_browse_data_master">
+        <li class="treeview browse_data_master">
           <a href="<?php echo base_url(); ?>browse_data_master"><i class="fa fa-book"></i> <span>Browse Data Master</span>
           <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
           </a>
           <ul class="treeview-menu">
-            <li class="submenu_tabungan"><a href="<?php echo base_url(); ?>browse_data_master/tabungan"><i class="fa fa-circle-o"></i> Tabungan</a></li>
-            <li class="submenu_kredit"><a href="<?php echo base_url(); ?>browse_data_master/kredit"><i class="fa fa-circle-o"></i> Kredit</a></li>
+            <li class="tabungan"><a href="<?php echo base_url(); ?>browse_data_master/tabungan"><i class="fa fa-circle-o"></i> Tabungan</a></li>
+            <li class="kredit"><a href="<?php echo base_url(); ?>browse_data_master/kredit"><i class="fa fa-circle-o"></i> Kredit</a></li>
           </ul>
         </li>
         <li class="treeview transaksi"><a href="<?php echo base_url(); ?>transaction"><i class="fa fa-book"></i> <span>Transaksi</span></a></li>
@@ -538,7 +538,16 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-
+<script type="text/javascript">
+  var menu = <?php echo json_encode($menu);?> ;
+  $(document).ready(function(){
+    $(".sidebar-menu li").removeClass('active');
+    $.each(menu, function(idx, val){
+      console.log(val);
+      $("."+val).addClass('active');
+    });
+  });
+</script>
 
 </body>
 </html>
