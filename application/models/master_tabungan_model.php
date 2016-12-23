@@ -8,6 +8,11 @@ class Master_tabungan_model extends CI_Model
         parent::__construct();
     }
 
+	public function do_read()
+	{
+		return $this->db->get('master_tabungan')->result_array();
+	}
+
 	public function do_save($data)
 	{
 		return $this->db->insert('master_tabungan',$data);
@@ -63,7 +68,6 @@ class Master_tabungan_model extends CI_Model
 		$this->db->set('created_by', $this->session->userdata('user'));
 		$this->db->insert('tr_tarik_tunai');
 	}
-
 }
 
 /* End of file welcome.php */

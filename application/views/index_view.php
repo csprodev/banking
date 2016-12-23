@@ -305,6 +305,9 @@
             <li><a href="<?php echo base_url(); ?>master_nasabah"><i class="fa fa-circle-o"></i>Master Nasabah</a></li>
             <li><a href="<?php echo base_url(); ?>master_tabungan"><i class="fa fa-circle-o"></i>Master Tabungan</a></li>
             <li><a href="<?php echo base_url(); ?>master_kredit"><i class="fa fa-circle-o"></i>Master Kredit</a></li>
+            <li><a href="<?php echo base_url(); ?>master_nasabah/list_data"><i class="fa fa-circle-o"></i>List Master Nasabah</a></li>
+            <li><a href="<?php echo base_url(); ?>master_tabungan/list_data"><i class="fa fa-circle-o"></i>List Master Tabungan</a></li>
+            <li><a href="<?php echo base_url(); ?>master_kredit/list_data"><i class="fa fa-circle-o"></i>List Master Kredit</a></li>
           </ul>
         </li>
         <li class="treeview menu_browse_data_master">

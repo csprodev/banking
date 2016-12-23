@@ -24,124 +24,126 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label>No Rekening</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Nasabah</label>
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              <input type="text" class="form-control"> 
+      <form id="dischargeform" action="<?php echo base_url(); ?>master_kredit/save" method="post">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>No Rekening</label>
+              <input type="text" name="mk_no_rekening" class="form-control">
             </div>
-          </div>
-          <div class="form-group">
-            <label>Produk</label>
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              <input type="text" class="form-control"> 
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Kode Group II</label>
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              <input type="text" class="form-control"> 
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Type</label>
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              <input type="text" class="form-control"> 
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Jumlah Angsuran</label>
-            <select class="form-control select2" style="width: 100%;">
-              <option selected="selected">12</option>
-              <option>24</option>
-              <option>32</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Tanggal Tagih</label>
-            <select class="form-control select2" style="width: 100%;">
-              <option selected="selected">1</option>
-              <option>2</option>
-              <option>3</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Suku Bunga</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Adm. Lain</label>
-            <input type="text" class="form-control">
-          </div>
-        </div>
-        <!-- /.col -->
-        <div class="col-md-6">
-          <div class="form-group">
-            <label>No Alternatif</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Kode Integrasi</label>
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              <input type="text" class="form-control"> 
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Group I</label>
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              <input type="text" class="form-control"> 
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Kode Group III</label>
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              <input type="text" class="form-control"> 
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Jangka Waktu</label>
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              <input type="text" class="form-control"> 
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Tanggal Tempo</label>
-            <div class="input-group date">
-              <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
+            <div class="form-group">
+              <label>Nasabah</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" name="mk_nasabah" class="form-control"> 
               </div>
-              <input type="text" class="form-control pull-right" id="datepicker">
+            </div>
+            <div class="form-group">
+              <label>Produk</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" name="mk_produk" class="form-control"> 
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Kode Group II</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" name="mk_kode_group_2" class="form-control"> 
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Type</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" name="mk_type" class="form-control"> 
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Jumlah Angsuran</label>
+              <select name="mk_jumlah_angsuran" class="form-control select2" style="width: 100%;">
+                <option selected="selected">12</option>
+                <option>24</option>
+                <option>32</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Tanggal Tagih</label>
+              <select name="mk_tanggal_tagih" class="form-control select2" style="width: 100%;">
+                <option selected="selected">1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Suku Bunga</label>
+              <input type="text" name="mk_suku_bunga" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Adm. Lain</label>
+              <input type="text" name="mk_adm_lain" class="form-control">
             </div>
           </div>
-          <div class="form-group">
-            <label>Periode</label>
-            <input type="text" class="form-control">
+          <!-- /.col -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>No Alternatif</label>
+              <input type="text" name="mk_no_alternatif" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Kode Integrasi</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" name="mk_kode_integrasi" class="form-control"> 
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Group I</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" name="mk_group1" class="form-control"> 
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Kode Group III</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" name="mk_kode_group_3" class="form-control"> 
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Jangka Waktu</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" name="mk_jangka_waktu" class="form-control"> 
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Tanggal Tempo</label>
+              <div class="input-group date">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" name="mk_tanggal_tempo" class="form-control pull-right" id="datepicker">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Periode</label>
+              <input type="text" name="mk_periode" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Jumlah Pinjam</label>
+              <input type="text" name="mk_jumlah_pinjam" class="form-control">
+            </div>
+            <!-- /.form-group -->
           </div>
-          <div class="form-group">
-            <label>Jumlah Pinjam</label>
-            <input type="text" class="form-control">
-          </div>
-          <!-- /.form-group -->
+          <!-- /.col -->
         </div>
-        <!-- /.col -->
-      </div>
-      <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Simpan Registrasi Nasabah</button>
-        <button type="submit" class="btn btn-danger">Batalkan Registrasi</button>
-      </div>
+        <div class="box-footer">
+          <button type="submit" class="btn btn-primary">Simpan Registrasi Kredit</button>
+          <!-- <button type="submit" class="btn btn-danger">Batalkan Registrasi</button> -->
+        </div>
+      </form>
       <!-- /.row -->
     </div>
     <!-- /.box-body -->

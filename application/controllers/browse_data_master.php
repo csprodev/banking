@@ -45,6 +45,8 @@ class Browse_data_master extends CI_Controller {
 	public function kredit()
 	{
 		$userdata= $this->userdb->getLoginInfo($this->session->userdata('user'));
+		$data_kredit = $this->master_tabungan_model->gets();
+
 		$data = array(
 			'link' => 'kredit_view.php',
 			'userdata' => $userdata

@@ -1,4 +1,8 @@
 <body class="hold-transition skin-blue sidebar-mini">
+  <div class="alert alert-danger alert-dismissible" style="display: none;">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Error!</strong> Silakan pilih salah satu nasabah dibawah ini!
+  </div>
     <section class="content-header">
       <h1>
         Tabungan
@@ -62,8 +66,21 @@
                 </tfoot>
               </table>
 
+              <!-- modal alert -->
+              <div class="modal fade warning" id="danger-alert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="alert alert-danger alert-dismissible">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4><i class="icon fa fa-ban"></i> Warning!</h4>
+                      Silakan pilih salah satu nasabah dibawah ini!
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <!-- Modal -->
-              <div class="modal fade" id="setor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal fade modaltrans" id="setor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                   <form method="post" role="form" action="proses_setor" >
@@ -75,9 +92,12 @@
                       
                         <div class="box-body">
                           <div class="form-group">
+                            <label for="no_rekening_setor">No. Rekening</label>
+                            <input type="text" class="form-control" id="no_rekening_setor" name="no_rekening_setor" disabled value="">
                             <label for="nominal">Nominal</label>
-                            <input type="text" class="form-control" id="nominal_setor" placeholder="0" name="nominal_setor">
+                            <input type="text" class="form-control" id="nominal_setor" placeholder="Rp." name="nominal_setor">
                             <input type="hidden" class="form-control" id="mt_no_rekening_setor" name="mt_no_rekening_setor">
+                            
                           </div>
                         </div>
                         <!-- <div class="box-footer">
@@ -93,7 +113,7 @@
                   </div>
                 </div>
               </div>
-              <div class="modal fade" id="tarik" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal fade modaltrans" id="tarik" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <form method="post" role="form" action="proses_tarik" >
@@ -149,8 +169,8 @@
       e.preventDefault();
       var hidden_no_rek = $("#mt_no_rekening_tarik").val();
       if(hidden_no_rek == '') {
-        alert('Silakan pilih salah satu nasabah dibawah ini!');
-        return false;
+        $(".alert").show();
+        $('.modaltrans').modal('hide');
       }
     });
 
@@ -159,6 +179,8 @@
       console.log(no_rek);
       $("#mt_no_rekening_tarik").val(no_rek);
       $("#mt_no_rekening_setor").val(no_rek);
+      $("#no_rekening_tarik").val(no_rek);
+      $("#no_rekening_setor").val(no_rek);
 
       $(".checklist").prop("checked", false);
       $(this).prop("checked", true);
