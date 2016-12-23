@@ -41,4 +41,22 @@ class UserDB extends CI_Model {
 			return null;
 	}
 
+	function set_remember_token($usr_id, $remember_token)
+	{
+		$this->db->where('usr_id', $usr_id);
+		$this->db->set('usr_remember_token', $remember_token);
+		$this->db->update('users');
+	}
+
+	function check_remember_token($post)
+	{
+		$this->db->where('usr_id',$post['usr_id']);
+		$this->db->where('usr_remember_token',$post['remember_token']);
+		$res = $this->db->get('users');
+		if($res->num_rows() > 0)
+			return $res->row();
+		else
+			return null;
+	}
+
 }

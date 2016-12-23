@@ -29,7 +29,10 @@ class Login extends CI_Controller {
 			}
 
 			$this->session->unset_userdata('err_msg');
+			$remember_token = md5($user->usr_id.time());
+			$this->userdb->set_remember_token($user->usr_id, $remember_token);
 			$this->session->set_userdata('user',$user->usr_id);
+			$this->session->set_userdata('remember_token',$remember_token);
 			
 			redirect();
 		}

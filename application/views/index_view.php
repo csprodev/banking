@@ -10,7 +10,7 @@
     <!-- Logo -->
     <a href="<?php echo base_url();?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>IBS</b></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>IBS</b> Branchless</span>
     </a>
@@ -293,8 +293,8 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="active"><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i><span>Dashboard</a></li>
-        <li class="treeview">
+        <li class="active menu_dashboard"><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i><span>Dashboard</a></li>
+        <li class="treeview" id="">
           <a href="#">
             <i class="fa fa-book"></i>
             <span>Registrasi</span>
@@ -307,21 +307,21 @@
             <li><a href="<?php echo base_url(); ?>master_kredit"><i class="fa fa-circle-o"></i>Master Kredit</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview menu_browse_data_master">
           <a href="<?php echo base_url(); ?>browse_data_master"><i class="fa fa-book"></i> <span>Browse Data Master</span>
           <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>browse_data_master/tabungan"><i class="fa fa-circle-o"></i> Tabungan</a></li>
-            <li><a href="<?php echo base_url(); ?>browse_data_master/kredit"><i class="fa fa-circle-o"></i> Kredit</a></li>
+            <li class="submenu_tabungan"><a href="<?php echo base_url(); ?>browse_data_master/tabungan"><i class="fa fa-circle-o"></i> Tabungan</a></li>
+            <li class="submenu_kredit"><a href="<?php echo base_url(); ?>browse_data_master/kredit"><i class="fa fa-circle-o"></i> Kredit</a></li>
           </ul>
         </li>
-        <li><a href="<?php echo base_url(); ?>transaction"><i class="fa fa-book"></i> <span>Transaksi</span></a></li>
-        <li><a href="<?php echo base_url(); ?>report"><i class="fa fa-book"></i> <span>Laporan</span></a></li>
-        <li><a href="<?php echo base_url(); ?>upload"><i class="fa fa-book"></i> <span>Upload Data</span></a></li>
-        <li><a href="<?php echo base_url(); ?>log_out"><i class="fa fa-book"></i> <span>Keluar Aplikasi</span></a></li>
+        <li class="treeview transaksi"><a href="<?php echo base_url(); ?>transaction"><i class="fa fa-book"></i> <span>Transaksi</span></a></li>
+        <li class="treeview laporan"><a href="<?php echo base_url(); ?>report"><i class="fa fa-book"></i> <span>Laporan</span></a></li>
+        <li class="treeview upload_data"><a href="<?php echo base_url(); ?>upload"><i class="fa fa-book"></i> <span>Upload Data</span></a></li>
+        <!-- <li class="treeview menu_browse_data_master"><a href="<?php echo base_url(); ?>log_out"><i class="fa fa-book"></i> <span>Keluar Aplikasi</span></a></li> -->
       </ul>
     </section>
     <!-- /.sidebar -->

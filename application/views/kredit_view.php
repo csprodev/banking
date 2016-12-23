@@ -23,36 +23,34 @@
           <div class="box">
             <div class="box-header">
               <!-- <h3 class="box-title">Tabungan</h3> -->
+              <div class="btn-group">
+                <button type="button" class="btn btn-info">Angsuran</button>
+              </div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-success">Riwayat</button>
+              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="tableTabungan" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th width="20%">No Rekening</th>
-                  <th width="25%">Nama</th>
-                  <th width="35%">Alamat</th>
-                  <th width="20%"></th>
+                  <th width="5%"></th>
+                  <th width="25%">No Rekening</th>
+                  <th width="30%">Nama</th>
+                  <th width="40%">Alamat</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
+                  <td align="center">
+                    <input type="checkbox" name="">
+                  </td>
                   <td>Trident</td>
                   <td>Internet
                     Explorer 4.0
                   </td>
                   <td>Win 95+</td>
-                  <td align="center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-info">Angsuran</button>
-                      </div>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success">Riwayat</button>
-                      </div>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-warning">Copy</button>
-                      </div>
-                  </td>
                 </tr>
                
                 </tfoot>

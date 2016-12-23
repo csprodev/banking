@@ -21,42 +21,43 @@
           <div class="box">
             <div class="box-header">
               <!-- <h3 class="box-title">Tabungan</h3> -->
+              <div class="btn-group">
+                <button type="button" class="btn btn-info btnShowModal" data-toggle="modal" data-target="#setor">Setor</button>
+              </div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-danger btnShowModal" data-toggle="modal" data-target="#tarik">Tarik</button>
+              </div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-success btnShowModal">Rek. Koran</button>
+              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="tableTabungan" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                  <th width="5%"></th>
                   <th width="15%">No Rekening</th>
-                  <th width="20%">Nama</th>
-                  <th width="30%">Alamat</th>
-                  <th width="15%">Saldo</th>
-                  <th width="20%"></th>
+                  <th width="25%">Nama</th>
+                  <th width="35%">Alamat</th>
+                  <th width="20%">Saldo</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td align="right"><?php echo 'Rp. '.number_format(100000,0,',','.');?></td>
-                  <td align="center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#setor">Setor</button>
-                    </div>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#tarik">Tarik</button>
-                    </div>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-success">Rek. Koran</button>
-                    </div>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-warning">Copy</button>
-                    </div>
-                  </td>
-                </tr>
+                <?php 
+                foreach($data_tabungan as $k=>$val) { ?>
+                  <tr>
+                    <td align="center">
+                      <input type="checkbox" name="checklist" id="checklist" data="<?php echo $val->mt_no_rekening; ?>" class="checklist">
+                    </td>
+                    <td><?php echo $val->mt_no_rekening; ?></td>
+                    <td><?php echo $val->mn_nama_nasabah; ?></td>
+                    <td><?php echo $val->mn_alamat_nasabah; ?></td>
+                    <td align="right"><?php echo 'Rp. '.number_format($saldo[$k],0,',','.');?></td>
+                  </tr>
+                  <?php
+                }
+                ?>
                
                 </tfoot>
               </table>
@@ -65,54 +66,58 @@
               <div class="modal fade" id="setor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
+                  <form method="post" role="form" action="proses_setor" >
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       <h4 class="modal-title" id="myModalLabel">Setor</h4>
                     </div>
                     <div class="modal-body">
-                      <form role="form">
+                      
                         <div class="box-body">
                           <div class="form-group">
                             <label for="nominal">Nominal</label>
-                            <input type="text" class="form-control" id="nominal" placeholder="0">
+                            <input type="text" class="form-control" id="nominal_setor" placeholder="0" name="nominal_setor">
+                            <input type="hidden" class="form-control" id="mt_no_rekening_setor" name="mt_no_rekening_setor">
                           </div>
                         </div>
                         <!-- <div class="box-footer">
                           <button type="submit" class="btn btn-primary">Submit</button>
                         </div> -->
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+                      
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btnSubmitSetor" name="btnSubmitSetor">Save changes</button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
               <div class="modal fade" id="tarik" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="myModalLabel">Tarik</h4>
-                    </div>
-                    <div class="modal-body">
-                      <form role="form">
+                    <form method="post" role="form" action="proses_tarik" >
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Tarik</h4>
+                      </div>
+                      <div class="modal-body">
                         <div class="box-body">
                           <div class="form-group">
                             <label for="nominal">Nominal</label>
-                            <input type="text" class="form-control" id="nominal" placeholder="0">
+                            <input type="text" class="form-control" id="nominal_tarik" placeholder="0" name="nominal_tarik">
+                            <input type="hidden" class="form-control" id="mt_no_rekening_tarik" name="mt_no_rekening_tarik">
                           </div>
                         </div>
                         <!-- <div class="box-footer">
                           <button type="submit" class="btn btn-primary">Submit</button>
                         </div> -->
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -127,6 +132,7 @@
     </section>
 
 <script>
+  var itemchecked = '';
   $(function () {
     $('#tableTabungan').DataTable({
       "paging": true,
@@ -139,8 +145,24 @@
   });
 
   $(document).ready(function(){
-    $(".sidebar-menu li").removeClass('active');
-    $(".sidebar-menu li").addClass('active');
+    $(document).on('click', '.btnShowModal', function(e){
+      e.preventDefault();
+      var hidden_no_rek = $("#mt_no_rekening_tarik").val();
+      if(hidden_no_rek == '') {
+        alert('Silakan pilih salah satu nasabah dibawah ini!');
+        return false;
+      }
+    });
+
+    $(document).on('click', ' #checklist', function(){
+      var no_rek = $(this).attr('data');
+      console.log(no_rek);
+      $("#mt_no_rekening_tarik").val(no_rek);
+      $("#mt_no_rekening_setor").val(no_rek);
+
+      $(".checklist").prop("checked", false);
+      $(this).prop("checked", true);
+    });
   });
 </script>
 </body>
