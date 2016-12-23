@@ -21,6 +21,19 @@ class Master_nasabah extends CI_Controller
 		$this->load->view('index_view', $data);
 	}
 
+	public function list_data()
+	{
+		// $list_data = $this->get_db->do_read();
+		$userdata = $this->userdb->getLoginInfo($this->session->userdata('user'));
+
+		$data = array(
+			'link' => 'master_nasabah_list_view.php',
+			'userdata' => $userdata,
+		);
+
+		$this->load->view('index_view', $data);
+	}
+
 	public function save()
 	{
 		$data = $this->input->post();
