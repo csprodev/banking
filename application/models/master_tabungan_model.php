@@ -13,9 +13,27 @@ class Master_tabungan_model extends CI_Model
 		return $this->db->get('master_tabungan')->result_array();
 	}
 
+	public function do_read_row($params)
+	{
+		$this->db->where('mt_id', $params);
+		return $this->db->get('master_tabungan')->row_array();
+	}
+
 	public function do_save($data)
 	{
 		return $this->db->insert('master_tabungan',$data);
+	}
+
+	public function do_edit($data, $id)
+	{
+		$this->db->where('mt_id', $id);
+		return $this->db->update('master_tabungan',$data);
+	}
+
+	public function do_delete($id)
+	{
+		$this->db->where('mt_id', $id);
+		return $this->db->delete('master_tabungan');
 	}
 
 	public function gets()

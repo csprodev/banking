@@ -21,7 +21,7 @@
           <a href="<?php echo base_url(); ?>master_tabungan" class="btn btn-app">
             <i class="fa fa-plus"></i>Add
           </a>
-          <a class="btn btn-app">
+          <a id="editButton" class="btn btn-app">
             <i class="fa fa-edit"></i> Edit
           </a>
           <a  id="deleteButton" class="btn btn-app">
@@ -75,6 +75,7 @@
   <!-- /.row -->
 </section>
 <!-- /.content -->
+
 <script>
   $(function () {
     var table = $('#grid').DataTable({
@@ -82,54 +83,49 @@
     });
 
     $('#grid tbody').on( 'click', 'tr', function (a) {
-      if ( $(this).hasClass('selected') ) 
-      {
+      if ( $(this).hasClass('selected')){
         $(this).removeClass('selected');
       } 
-      else 
-      {
+      else {
         var d = table.row( this ).data();
         table.$('tr.selected').removeClass('selected');
         $(this).addClass('selected');
       }
     });
 
-    $('#deleteButton').click( function () {
-        // var params = table.row('.selected').data();
-        // console.log("<?php echo base_url().'master_tabungan/delete'; ?>");
-        table.ajax.reload();
-        // $.get( "<?php echo base_url().'master_tabungan/delete'; ?>", function( data ) {
-        //   $( ".result" ).html( data );
-        //   alert(  "Load was performed." );
-        // });
-       
-    } );
-
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
+    $('#editButton').click( function (){
+      var params = table.row('.selected').data();
+      if(!params) {
+        alert('Select row first!');
+      } else {
+        location.href = "<?php echo base_url(); ?>master_tabungan/index/" + params[0]; 
+      }
     });
-  });
 
-  // $(document).ready(function() {
-  //   var table = $('#example').DataTable();
- 
-  //     $('#grid tbody').on( 'click', 'tr', function () {
-  //         if ( $(this).hasClass('selected') ) {
-  //             $(this).removeClass('selected');
-  //         }
-  //         else {
-  //             table.$('tr.selected').removeClass('selected');
-  //             $(this).addClass('selected');
-  //         }
-  //     } );
-   
-  //     $('#button').click( function () {
-  //         table.row('.selected').remove().draw( false );
-  //     } );
-  // } );
+    $('#deleteButton').click( function (){
+      var params = table.row('.selected').data();
+
+      if(!params) {
+        alert('Select row first !');
+      } else {
+        if (confirm("Are you sure?")) {
+          $.ajax({
+            url: "<?php echo base_url().'master_tabungan/delete/'; ?>"+params[0],
+            context: document.body,
+            success:function(res) {
+
+              if(res == 'success'){
+                table.row('.selected').remove().draw( false );
+              } else {
+                alert(res);
+              }
+            }
+          });
+        }
+        return false;
+      }
+
+    });
+
+  });
 </script>

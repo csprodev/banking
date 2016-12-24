@@ -17,20 +17,21 @@
   <div class="box box-default">
     <!-- /.box-header -->
     <div class="box-body">
-      <form id="dischargeform" action="<?php echo base_url(); ?>master_nasabah/save" method="post">
+      <form id="dischargeform" action="<?php echo base_url().'master_nasabah/'.$action; ?>" method="post">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label>ID Nasabah</label>
-              <input type="text" name="mn_id_nasabah" class="form-control">
+              <input type="hidden" name="mn_id" value="<?php echo isset($edit['mn_id']) ? $edit['mn_id'] : '' ?>">
+              <input type="text" name="mn_id_nasabah" class="form-control" value="<?php echo isset($edit['mn_id_nasabah']) ? $edit['mn_id_nasabah'] : '' ?>">
             </div>
             <div class="form-group">
               <label>Nama Nasabah</label>
-              <input type="text" name="mn_nama_nasabah" class="form-control">
+              <input type="text" name="mn_nama_nasabah" class="form-control" value="<?php echo isset($edit['mn_nama_nasabah']) ? $edit['mn_nama_nasabah'] : '' ?>">
             </div>
             <div class="form-group">
               <label>Nama Ibu Kandung</label>
-              <input type="text" name="mn_nama_ibu_kandung" class="form-control">
+              <input type="text" name="mn_nama_ibu_kandung" class="form-control" value="<?php echo isset($edit['mn_nama_ibu_kandung']) ? $edit['mn_nama_ibu_kandung'] : '' ?>">
             </div>
             <div class="form-group">
               <label>Alamat Nasabah</label>
@@ -49,11 +50,11 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>No Alternatif</label>
-              <input type="text" name="mn_no_alternatif" class="form-control" >
+              <input type="text" name="mn_no_alternatif" class="form-control"  value="<?php echo isset($edit['mn_no_alternatif']) ? $edit['mn_no_alternatif'] : '' ?>">
             </div>
             <div class="form-group">
               <label>Nama Alias</label>
-              <input type="text" name="mn_nama_alias" class="form-control" >
+              <input type="text" name="mn_nama_alias" class="form-control"  value="<?php echo isset($edit['mn_nama_alias']) ? $edit['mn_nama_alias'] : '' ?>">
             </div>
 
             <div class="form-group">
@@ -62,7 +63,7 @@
                 <div class="col-lg-6">
                   <div class="radio">
                     <label>
-                      <input type="radio" name="mn_jekel" id="optionsRadios1" value="L" checked>
+                      <input type="radio" name="mn_jekel" id="optionsRadios1" value="L" checked value="<?php echo isset($edit['mn_jekel']) ? $edit['mn_jekel'] : '' ?>">
                       Laki-laki
                     </label>
                   </div>
@@ -72,7 +73,7 @@
                   <div class="input-group">
                     <div class="radio">
                       <label>
-                        <input type="radio" name="mn_jekel" id="optionsRadios1" value="P">
+                        <input type="radio" name="mn_jekel" id="optionsRadios1" value="P" value="<?php echo isset($edit['mn_jekel']) ? $edit['mn_jekel'] : '' ?>">
                           Perempuan
                         </label>
                       </div>
@@ -84,7 +85,7 @@
             </div>
             <div class="form-group">
               <label>Tempat Lahir</label>
-              <input type="text" name="mn_tempat_lahir" class="form-control" >
+              <input type="text" name="mn_tempat_lahir" class="form-control"  value="<?php echo isset($edit['mn_tempat_lahir']) ? $edit['mn_tempat_lahir'] : '' ?>">
             </div>
             <div class="form-group">
               <label>Tanggal Lahir</label>
@@ -93,7 +94,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-calendar"></i>
                 </div>
-                <input type="text" name="mn_tanggal_lahir" class="form-control pull-right" id="datepicker">
+                <input type="text" name="mn_tanggal_lahir" class="form-control pull-right" id="datepicker" value="<?php echo isset($edit['mn_tanggal_lahir']) ? $edit['mn_tanggal_lahir'] : '' ?>">
               </div>
             </div>
             <!-- /.form-group -->
@@ -101,7 +102,7 @@
           <!-- /.col -->
         </div>
         <div class="box-footer">
-          <button type="submit" class="btn btn-primary" style="margin-left:-9px">Simpan Registrasi Nasabah</button>
+          <button type="submit" class="btn btn-primary" style="margin-left:-9px"><?php echo isset($edit['mn_id']) ? 'Update Data Nasabah' : 'Simpan Registrasi Nasabah' ?></button>
           <!-- <button type="button" class="btn btn-danger">Batalkan Registrasi</button> -->
         </div>
       </form>
@@ -154,7 +155,6 @@
           $("#myModal").modal('show');
           $('#SubForm').click(function () {
               form.submit();
-              alert('succes save');
          });
       }
     });
