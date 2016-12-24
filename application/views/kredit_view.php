@@ -78,13 +78,16 @@
                             <label for="no_rekening_kredit">No. Rekening</label>
                             <input type="text" class="form-control" id="no_rekening_kredit" name="no_rekening_kredit" disabled value="">
                             <input type="hidden" class="form-control" id="mk_no_rekening_kredit" name="mk_no_rekening_kredit">
-                            
+
                             <label for="nominal_pokok">Pokok</label>
                             <input type="text" class="form-control" id="nominal_pokok" name="nominal_pokok" disabled value="">
-                            <label for="nominal_pokok">Pokok</label>
-                            <input type="text" class="form-control" id="nominal_pokok" name="nominal_pokok" disabled value="">
-                            
-                            
+                            <label for="nominal_profit">Profit</label>
+                            <input type="text" class="form-control" id="nominal_profit" name="nominal_profit" disabled value="">
+                            <label for="nominal_admin">Admin</label>
+                            <input type="text" class="form-control" id="nominal_admin" name="nominal_admin" disabled value="">
+                            <label for="nominal_denda">Denda</label>
+                            <input type="text" class="form-control" id="nominal_denda" name="nominal_denda" disabled value="">
+                                                       
                           </div>
                         </div>
                         <!-- <div class="box-footer">
