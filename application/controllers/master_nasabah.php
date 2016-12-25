@@ -54,7 +54,8 @@ class Master_nasabah extends CI_Controller
 	{
 		$data = $this->input->post();
 		$data['mn_tanggal_lahir'] = date_format(date_create($data['mn_tanggal_lahir']),'Y-m-d');
-
+		unset($data['mt_id']);
+		
 		$save = $this->get_db->do_save($data);
 
 		redirect("master_nasabah");
@@ -79,10 +80,6 @@ class Master_nasabah extends CI_Controller
 			echo 'success';
 		else
 			echo 'failed delete data, please check code!';
-		// return false;
 	}
 
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */

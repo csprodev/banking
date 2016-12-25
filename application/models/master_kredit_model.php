@@ -13,9 +13,27 @@ class Master_kredit_model extends CI_Model
 		return $this->db->get('master_kredit')->result_array();
 	}
 
+	public function do_read_row($params)
+	{
+		$this->db->where('mk_id', $params);
+		return $this->db->get('master_kredit')->row_array();
+	}
+
 	public function do_save($data)
 	{
 		return $this->db->insert('master_kredit',$data);
+	}
+
+	public function do_edit($data, $id)
+	{
+		$this->db->where('mk_id', $id);
+		return $this->db->update('master_kredit',$data)	;
+	}
+
+	public function do_delete($id)
+	{
+		$this->db->where('mk_id', $id);
+		return $this->db->delete('master_kredit');
 	}
 
 	public function gets()
@@ -29,6 +47,3 @@ class Master_kredit_model extends CI_Model
 			return array();
 	}
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */

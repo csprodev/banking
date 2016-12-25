@@ -38,6 +38,9 @@
               <label>Pemilik</label>
                 <input type="text" name="mt_pemilik" class="form-control" value="<?php echo isset($edit['mt_id_nasabah']) ? $edit['mt_id_nasabah'] : '' ?>"> 
             </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-md-6">
             <div class="form-group">
               <label>Group 1</label>
                 <input type="text" name="mt_group1" class="form-control" value="<?php echo isset($edit['mt_group1']) ? $edit['mt_group1'] : '' ?>"> 
@@ -67,8 +70,6 @@
               </select>
             </div>
           </div>
-          <!-- /.col -->
-         
           <!-- /.col -->
         </div>
         <div class="box-footer"> 

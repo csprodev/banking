@@ -30,7 +30,6 @@ class Master_nasabah_model extends CI_Model
 		return $this->db->update('master_nasabah',$data);
 	}
 
-
 	public function do_delete($id)
 	{
 		$this->db->where('mn_id', $id);
@@ -38,6 +37,3 @@ class Master_nasabah_model extends CI_Model
 	}
 
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
