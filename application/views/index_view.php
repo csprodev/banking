@@ -312,16 +312,30 @@
         </li>
         <li class="treeview browse_data_master">
           <a href="<?php echo base_url(); ?>browse_data_master"><i class="fa fa-book"></i> <span>Browse Data Master</span>
-          <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
           <ul class="treeview-menu">
             <li class="tabungan"><a href="<?php echo base_url(); ?>browse_data_master/tabungan"><i class="fa fa-circle-o"></i> Tabungan</a></li>
             <li class="kredit"><a href="<?php echo base_url(); ?>browse_data_master/kredit"><i class="fa fa-circle-o"></i> Kredit</a></li>
           </ul>
         </li>
-        <li class="treeview transaksi"><a href="<?php echo base_url(); ?>transaction"><i class="fa fa-book"></i> <span>Transaksi</span></a></li>
+        <li class="treeview browse_data_master">
+          <a href="<?php echo base_url(); ?>"><i class="fa fa-book"></i> <span>Transaksi</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="setoran_tunai"><a href="<?php echo base_url(); ?>"><i class="fa fa-circle-o"></i>Setoran Tunai</a></li>
+            <li class="penarikan_tunai"><a href="<?php echo base_url(); ?>"><i class="fa fa-circle-o"></i>Penarikan Tunai</a></li>
+            <li class="angsuran_pinjaman"><a href="<?php echo base_url(); ?>"><i class="fa fa-circle-o"></i>Angsuran Pinjaman</a></li>
+            <li class="transaksi_jurnal"><a href="<?php echo base_url(); ?>transaksi_jurnal"><i class="fa fa-circle-o"></i>Transaksi Jurnal</a></li>
+            <li class="reversal"><a href="<?php echo base_url(); ?>"><i class="fa fa-circle-o"></i>Reversal</a></li>
+            <li class="bagi_hasil"><a href="<?php echo base_url(); ?>bagi_hasil"><i class="fa fa-circle-o"></i>Bagi Hasil</a></li>
+          </ul>
+        </li>
         <li class="treeview laporan"><a href="<?php echo base_url(); ?>report"><i class="fa fa-book"></i> <span>Laporan</span></a></li>
         <li class="treeview upload_data"><a href="<?php echo base_url(); ?>upload"><i class="fa fa-book"></i> <span>Upload Data</span></a></li>
         <!-- <li class="treeview menu_browse_data_master"><a href="<?php echo base_url(); ?>log_out"><i class="fa fa-book"></i> <span>Keluar Aplikasi</span></a></li> -->
