@@ -15,15 +15,31 @@ class Transaksi_jurnal extends CI_Controller
 	{
 		$list_data = $this->get_db->do_read();
 		$userdata = $this->userdb->getLoginInfo($this->session->userdata('user'));
+		$no_bukti = $this->get_db->get_no_bukti();
+
+		if(empty($no_bukti))
+		{
+			$no_bukti['tj_no_bukti'] = '00001';
+		}
+
 		$data = array(
 			'link' => 'transaksi_jurnal_view.php',
 			'userdata' => $userdata,
-			'action' => 'save',
 			'list_data' => $list_data,
-			'time' => date('d/m/Y H:i:s')
+			'time' => date('d/m/Y H:i:s'),
+			'no_bukti' => $no_bukti['tj_no_bukti']
 		);
 
 		$this->load->view('index_view', $data);
+	}
+
+	public function tambah_temp()
+	{
+		$post = $this->input->post(); 
+
+		$_SESSION['tambah_temp'] = $post;
+		print_r($_SESSION['tambah_temp']); exit;
+		exit;
 	}
 
 	public function save()

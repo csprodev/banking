@@ -12,9 +12,9 @@ class Transaksi_jurnal_model extends CI_Model
 		return $this->db->get('transaksi_jurnal')->result_array();
 	}
 
-	public function do_read_row($params)
+	public function get_no_bukti()
 	{
-		$this->db->where('mn_id', $params);
+		$this->db->order_by('tj_no_bukti', 'desc');
 		return $this->db->get('transaksi_jurnal')->row_array();
 	}
 
