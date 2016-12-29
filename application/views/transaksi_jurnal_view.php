@@ -29,7 +29,7 @@
         <div class="form-group" >
           <label for="inputEmail3" class="col-sm-2 control-label">Tgl. Trans:</label>
           <div class="col-sm-7">
-            <label><?php echo $time; ?></label>
+            <label style="margin-top: 6px;"><?php echo $time; ?></label>
           </div>
         </div>
         <div class="form-group">
@@ -67,11 +67,11 @@
             <tbody>
               <?php foreach($list_data as $data){ 
                     echo "<tr>";
-                  echo "<td hidden='true'>".$data['mn_id']."</td>";
-                  echo "<td>".$data['mn_id_nasabah']."</td>";
-                  echo "<td>".$data['mn_no_alternatif']."</td>";
-                  echo "<td>".$data['mn_nama_nasabah']."</td>";
-                  echo "<td>".$data['mn_nama_alias']."</td>";
+                  echo "<td hidden='true'>".$data['tj_id']."</td>";
+                  echo "<td>".$data['tj_kode_perkiraan']."</td>";
+                  echo "<td>".$data['tj_nama_perkiraan']."</td>";
+                  echo "<td>".$data['tj_debet']."</td>";
+                  echo "<td>".$data['tj_kredit']."</td>";
                   echo "</tr>";
               }?>
             </tbody>
