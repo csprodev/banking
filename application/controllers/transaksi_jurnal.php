@@ -8,15 +8,19 @@ class Transaksi_jurnal extends CI_Controller
         parent::__construct();
         $this->load->model('userdb');
         $this->load->model('transaksi_jurnal_model', 'get_db');
+		date_default_timezone_set('Asia/Jakarta');
     }
 
 	public function index($params = null)
 	{
+		$list_data = $this->get_db->do_read();
 		$userdata = $this->userdb->getLoginInfo($this->session->userdata('user'));
 		$data = array(
 			'link' => 'transaksi_jurnal_view.php',
 			'userdata' => $userdata,
-			'action' => 'save'
+			'action' => 'save',
+			'list_data' => $list_data,
+			'time' => date('d/m/Y H:i:s')
 		);
 
 		$this->load->view('index_view', $data);

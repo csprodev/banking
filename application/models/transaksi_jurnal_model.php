@@ -9,7 +9,7 @@ class Transaksi_jurnal_model extends CI_Model
 
     public function do_read()
 	{
-		return $this->db->get('transaksi_jurnal')->result_array();
+		return $this->db->get('master_nasabah')->result_array();
 	}
 
 	public function do_read_row($params)
