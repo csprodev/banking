@@ -9,6 +9,7 @@ class Transaksi_jurnal extends CI_Controller
         $this->load->model('userdb');
         $this->load->model('transaksi_jurnal_model', 'get_db');
 		date_default_timezone_set('Asia/Jakarta');
+		session_start();
     }
 
 	public function index($params = null)
@@ -36,21 +37,30 @@ class Transaksi_jurnal extends CI_Controller
 	public function tambah_temp()
 	{
 		$post = $this->input->post(); 
-
 		$_SESSION['tambah_temp'] = $post;
-		print_r($_SESSION['tambah_temp']); exit;
 		exit;
 	}
 
 	public function save()
 	{
-		$data = $this->input->post();
-		$data['mn_tanggal_lahir'] = date_format(date_create($data['mn_tanggal_lahir']),'Y-m-d');
-		unset($data['mt_id']);
-		
-		$save = $this->get_db->do_save($data);
 
-		redirect("master_nasabah");
+		$post = $this->input->post();
+		
+
+		if(!empty($_SESSION['tambah_temp']))
+		{
+			$dataFix = array_merge($post, $_SESSION['tambah_temp']);
+			$date = DateTime::createFromFormat('d/m/Y H:i:s', $dataFix['tj_tanggal_trans']);
+			$dataFix['tj_tanggal_trans'] = $date->format('Y/m/d H:i:s'); 
+			$save = $this->get_db->do_save($dataFix);
+			$_SESSION['tambah_temp'] = '';
+		}
+		else
+		{
+			
+		}
+
+		redirect("transaksi_jurnal");
 	}
 
 	public function edit()
@@ -64,12 +74,13 @@ class Transaksi_jurnal extends CI_Controller
 		redirect("master_nasabah/list_data");
 	}
 
-	public function delete($params)
+	public function delete()
 	{
-		$del = $this->get_db->do_delete($params);
+		$id = $this->input->get('id');
+		$del = $this->get_db->do_delete($id);
 
 		if($del)
-			echo 'success';
+			redirect("transaksi_jurnal");
 		else
 			echo 'failed delete data, please check code!';
 	}

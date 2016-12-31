@@ -20,7 +20,6 @@ class Transaksi_jurnal_model extends CI_Model
 
 	public function do_save($data)
 	{
-		$data['mn_no_rekening'] = '0901010';
 		return $this->db->insert('transaksi_jurnal',$data);
 	}
 
@@ -32,7 +31,7 @@ class Transaksi_jurnal_model extends CI_Model
 
 	public function do_delete($id)
 	{
-		$this->db->where('mn_id', $id);
+		$this->db->where('tj_id', $id);
 		return $this->db->delete('transaksi_jurnal');
 	}
 

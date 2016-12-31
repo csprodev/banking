@@ -24,23 +24,24 @@
   <!-- SELECT2 EXAMPLE -->
   <div class="box box-default">
     <div class="box-body">
-      <form method="post" action="butar" class="form-horizontal" style="margin-bottom: 20px">
+      <form method="post" action="transaksi_jurnal/save" class="form-horizontal" style="margin-bottom: 20px">
         <div class="form-group" >
           <label for="inputEmail3" class="col-sm-2 control-label">Tgl. Trans:</label>
           <div class="col-sm-7">
-            <label style="margin-top: 6px;"><?php echo $time; ?></label>
+            <!-- <label name="tj_tanggal_trans" style="margin-top: 6px;"><?php echo $time; ?></label> -->
+            <input type="text" readOnly="true" name="tj_tanggal_trans" class="form-control" id="uraian" value="<?php echo $time; ?>" required>
           </div>
         </div>
         <div class="form-group">
           <label for="inputPassword3" class="col-sm-2 control-label">Uraian:</label>
           <div class="col-sm-7">
-            <input type="text" class="form-control" id="uraian" required>
+            <input type="text" name="tj_uraian" class="form-control" id="uraian" required>
           </div>
         </div>
         <div class="form-group">
           <label for="inputPassword3" class="col-sm-2 control-label">No Bukti:</label>
           <div class="col-sm-7">
-            <input type="text" class="form-control" disabled id="noBukti" value="<?php echo $no_bukti; ?>">
+            <input type="text" name="tj_no_bukti" class="form-control" readOnly="true" id="noBukti" value="<?php echo $no_bukti; ?>">
           </div>
         </div>
         <div class="box-footer" style="margin-left:100px">
@@ -60,6 +61,7 @@
                 <th>NM. PERK</th>
                 <th>Debet</th>
                 <th>Kredit</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -71,6 +73,7 @@
                 echo "<td>".$data['tj_nama_perkiraan']."</td>";
                 echo "<td>".$data['tj_debet']."</td>";
                 echo "<td>".$data['tj_kredit']."</td>";
+                echo "<td><a href='#' data-href='transaksi_jurnal/delete?id=".$data['tj_id']."' data-toggle='modal' data-target='#confirm-delete'><i class='fa fa-trash'></a></td>";
                 echo "</tr>";
               }
               ?>
@@ -94,7 +97,7 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="tj_kode_perkiraan">Kode Perkiraan</label>
-                  <input type="text" class="form-control" id="tj_kode_perkiraan" name="tj_kode_perkiraan" value="">
+                  <input type="text" class="form-control" id="tj_kode_perkiraan" name="tj_kode_perkiraan">
                   
                   <label for="tj_nama_perkiraan">Keterangan</label>
                   <input type="text" class="form-control" id="tj_nama_perkiraan" name="tj_nama_perkiraan">
@@ -115,6 +118,23 @@
         </div>
       </div>
     </div>
+
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+              Delete Transaksi Jurnal
+          </div>
+          <div class="modal-body">
+              Anda ingin menghapus data ini?
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <a class="btn btn-danger btn-ok">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -125,16 +145,18 @@
     });
 
     $('#tambahSimpan').on('click',function(e){
-      console.log('lalala');
+
       $.post("transaksi_jurnal/tambah_temp",
       {
-          name: "Donald Duck",
-          city: "Duckburg"
+          tj_kode_perkiraan: $('#tj_kode_perkiraan').val(),
+          tj_nama_perkiraan: $('#tj_nama_perkiraan').val(),
+          tj_debet: $('#tj_debet').val(),
+          tj_kredit: $('#tj_kredit').val()
       },
       function(data, status){
-          alert("Data: " + data + "\nStatus: " + status);
+          alert("Data saved");
       });
-      // $('#tambah').modal('toggle');
+      $('#tambah').modal('toggle');
     });
 
     $('#grid tbody').on( 'click', 'tr', function (a) {
@@ -148,9 +170,13 @@
       }
     });
 
-    // $('#tambahBatal').on('click', function(){
-    //   $('#tambahBatal ').modal('toggle');
-    // });
+    $('#confirm-delete').on('show.bs.modal', function(e) {
+      $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+    });
+
+    $('#batal').on('show.bs.modal', function(e) {
+      $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+    });
 
   });
 </script>
