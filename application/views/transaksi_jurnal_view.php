@@ -97,7 +97,19 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="tj_kode_perkiraan">Kode Perkiraan</label>
-                  <input type="text" class="form-control" id="tj_kode_perkiraan" name="tj_kode_perkiraan">
+                  <!-- <input type="text" class="form-control" id="tj_kode_perkiraan" name="tj_kode_perkiraan"> -->
+                  <select name="tj_kode_perkiraan" id="tj_kode_perkiraan" class="form-control">
+                    <option value='' selected>-- Pilih Paket --</option>
+                    <?php
+                      if(!empty($rkp))
+                      {
+                        foreach($rkp as $key => $val)
+                        {
+                          echo "<option value='".$val['rkp_kode']."'>".$val['rkp_nama']."</option>";
+                        }
+                      }
+                    ?>
+                  </select>
                   
                   <label for="tj_nama_perkiraan">Keterangan</label>
                   <input type="text" class="form-control" id="tj_nama_perkiraan" name="tj_nama_perkiraan">
@@ -176,6 +188,32 @@
 
     $('#batal').on('show.bs.modal', function(e) {
       $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+    });
+
+    $('#tambah').on('show.bs.modal', function(e) {
+      console.log('abcdefg');
+    });
+
+    $("select").change(function(){
+      var currentId = $(this).attr("id");
+      var url = "<?php echo base_url().'transaksi_jurnal/get_ref_kode_perkiraan'; ?>";
+      
+      if(currentId == 'kategori_perawatan'){
+        kp_val = $(this).val();
+        // script loading
+
+        var send_data = "kp=" + kp_val + "&next_id=" + "type_perawatan";
+
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: send_data,
+          cache: false,
+          success: function(result){
+            document.getElementById("type_perawatan").innerHTML = result;
+          }
+        });
+      }
     });
 
   });

@@ -85,4 +85,25 @@ class Transaksi_jurnal extends CI_Controller
 			echo 'failed delete data, please check code!';
 	}
 
+	public function get_ref_kode_perkiraan()
+	{
+		$next_id = $_REQUEST['next_id'];
+		$content = "<option value=\"999\"> - - - </option>";
+		
+		if($next_id == 'type_perawatan')
+		{
+			$kp = $_REQUEST['kp'];
+
+			$jp = $this->hcm->do_get_jp($kp);
+
+
+			foreach($jp as $key => $val)
+			{
+				$content.= "<option value='".$val['jp_id']."'>".$val['jp_nama']."</option>";
+			}
+		}
+
+		echo $content;
+	}
+
 }

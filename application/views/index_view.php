@@ -336,7 +336,22 @@
             <li class="bagi_hasil"><a href="<?php echo base_url(); ?>bagi_hasil"><i class="fa fa-circle-o"></i>Bagi Hasil</a></li>
           </ul>
         </li>
-        <li class="treeview laporan"><a href="<?php echo base_url(); ?>report"><i class="fa fa-book"></i> <span>Laporan</span></a></li>
+        <li class="treeview browse_data_master">
+          <a href="<?php echo base_url(); ?>"><i class="fa fa-book"></i> <span>Laporan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="setoran_tunai"><a href="<?php echo base_url(); ?>neraca"><i class="fa fa-circle-o"></i>Neraca</a></li>
+            <li class="penarikan_tunai"><a href="<?php echo base_url(); ?>laba_rugi"><i class="fa fa-circle-o"></i>Laba Rugi</a></li>
+            <li class="angsuran_pinjaman"><a href="<?php echo base_url(); ?>mutasi_kas"><i class="fa fa-circle-o"></i>Mutasi Kas</a></li>
+            <li class="transaksi_jurnal"><a href="<?php echo base_url(); ?>rekening_koran_tabungan"><i class="fa fa-circle-o"></i>Rekening Koran Tabungan</a></li>
+            <li class="reversal"><a href="<?php echo base_url(); ?>riwayat_kredit"><i class="fa fa-circle-o"></i>Riwayat Kredit</a></li>
+            <li class="bagi_hasil"><a href="<?php echo base_url(); ?>jurnal_transaksi"><i class="fa fa-circle-o"></i>Jurnal Transaksi</a></li>
+            <li class="bagi_hasil"><a href="<?php echo base_url(); ?>rekap_transaksi"><i class="fa fa-circle-o"></i>Rekap Transaksi</a></li>
+          </ul>
+        </li>
         <li class="treeview upload_data"><a href="<?php echo base_url(); ?>upload"><i class="fa fa-book"></i> <span>Upload Data</span></a></li>
         <!-- <li class="treeview menu_browse_data_master"><a href="<?php echo base_url(); ?>log_out"><i class="fa fa-book"></i> <span>Keluar Aplikasi</span></a></li> -->
       </ul>
