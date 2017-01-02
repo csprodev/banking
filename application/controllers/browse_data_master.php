@@ -85,6 +85,31 @@ class Browse_data_master extends CI_Controller {
 
 		return $cek_remember_token;
 	}
+
+	public function trans_tabungan($param)
+	{
+		$userdata= $this->userdb->getLoginInfo($this->session->userdata('user'));
+		$data_tabungan = $this->tabungandb->gets();
+		$saldo = [];
+		foreach($data_tabungan as $k=>$val) {
+			$data_saldo_setor = $this->tabungandb->get_saldo_setor($val->mt_no_rekening);
+			$data_saldo_tarik = $this->tabungandb->get_saldo_tarik($val->mt_no_rekening);
+
+			array_push($saldo, $data_saldo_setor - $data_saldo_tarik);
+			
+		}
+		
+		$menu = array('transaksi',$param);
+		$data = array(
+			'link' => 'tabungan_view.php',
+			'userdata' => $userdata,
+			'data_tabungan' => $data_tabungan,
+			'saldo' => $saldo,
+			'menu' => $menu
+		);
+		
+		$this->load->view('index_view', $data);
+	}
 	
 }
 
