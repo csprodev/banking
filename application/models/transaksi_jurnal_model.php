@@ -35,4 +35,10 @@ class Transaksi_jurnal_model extends CI_Model
 		return $this->db->delete('transaksi_jurnal');
 	}
 
+	public function get_ref_kode_perkiraan()
+	{
+		$this->db->order_by('rkp_kode', 'asc');
+		return $this->db->get('ref_kode_perkiraan')->result_array();
+	}
+
 }

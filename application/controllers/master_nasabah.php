@@ -13,12 +13,16 @@ class Master_nasabah extends CI_Controller
 	public function index($params = null)
 	{
 		$userdata = $this->userdb->getLoginInfo($this->session->userdata('user'));
+
+		$id_nasabah = $this->id_nasabah();
+
 		$data = array(
 			'link' => 'master_nasabah_view.php',
 			'userdata' => $userdata,
 			'edit' => '',
 			'edit_mode' => false,
-			'action' => 'save'
+			'action' => 'save',
+			'id_nasabah' => $id_nasabah
 		);
 
 		if(!empty($params))
@@ -80,6 +84,24 @@ class Master_nasabah extends CI_Controller
 			echo 'success';
 		else
 			echo 'failed delete data, please check code!';
+	}
+
+	public function id_nasabah()
+	{
+		$index_nasabah = $this->get_db->get_idx_nasabah();
+
+		if(empty($index_nasabah))
+			$new_index_nasabah = 1;
+		else
+			$new_index_nasabah = $index_nasabah['index_nasabah'] + 1;
+
+		$new_index_nasabah = sprintf("%06d", $new_index_nasabah);	
+		$year = substr(date('Y'), 1);
+		$class = sprintf("%02d", '1');;
+		$random = rand(100, 999);
+
+		$id_nasabah = $new_index_nasabah.$class.$year.$random;
+		return $id_nasabah;
 	}
 
 }

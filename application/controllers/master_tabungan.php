@@ -17,6 +17,7 @@ class Master_tabungan extends CI_Controller
 	{
 		$userdata = $this->userdb->getLoginInfo($this->session->userdata('user'));
 
+		// $no_rekening = $this->no_rekening();
 		$data = array(
 			'link' => 'master_tabungan_view.php',
 			'userdata' => $userdata,
@@ -84,7 +85,23 @@ class Master_tabungan extends CI_Controller
 		// return false;
 	}
 
+	public function no_rekening()
+	{
+		$no_rekening = $this->get_db->get_idx_nasabah();
+
+		if(empty($index_nasabah))
+			$new_index_nasabah = 1;
+		else
+			$new_index_nasabah = $index_nasabah['index_nasabah'] + 1;
+
+		$new_index_nasabah = sprintf("%06d", $new_index_nasabah);	
+		$year = substr(date('Y'), 1);
+		$class = sprintf("%02d", '1');
+		$random = rand(100, 999);
+
+		$id_nasabah = $new_index_nasabah.$class.$year.$random;
+		return $id_nasabah;
+	}
+
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */

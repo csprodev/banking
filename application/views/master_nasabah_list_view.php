@@ -29,7 +29,7 @@
           </a>
         </div>
         <div class="box-body">
-          <table  id="grid" class="table table-bordered table-striped table-hover display">
+          <table width="1500px" id="grid" class="table table-bordered table-striped table-hover display">
             <thead>
               <tr>
                 <th hidden="true"></th>
@@ -37,7 +37,7 @@
                 <th>No Alternatif</th>
                 <th>Nama Nasabah</th>
                 <th>Nama Alias</th>
-                <th>Nama Ibu Kandung</th>
+                <th >Nama Ibu Kandung</th>
                 <th>Jenis Kelamin</th>
                 <th>Alamat Nasabah</th>
                 <th>Tempat Lahir</th>

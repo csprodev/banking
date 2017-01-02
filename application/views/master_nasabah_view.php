@@ -18,7 +18,7 @@
             <div class="form-group">
               <label>ID Nasabah</label>
               <input type="hidden" name="mn_id" value="<?php echo isset($edit['mn_id']) ? $edit['mn_id'] : '' ?>">
-              <input type="text" name="mn_id_nasabah" class="form-control" value="<?php echo isset($edit['mn_id_nasabah']) ? $edit['mn_id_nasabah'] : '' ?>">
+              <input type="text" name="mn_id_nasabah" class="form-control" readOnly=true value="<?php echo isset($edit['mn_id_nasabah']) ? $edit['mn_id_nasabah'] : $id_nasabah ?>">
             </div>
             <div class="form-group">
               <label>Nama Nasabah</label>
@@ -45,7 +45,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>No Alternatif</label>
-              <input type="text" name="mn_no_alternatif" class="form-control"  value="<?php echo isset($edit['mn_no_alternatif']) ? $edit['mn_no_alternatif'] : '' ?>">
+              <input type="text" name="mn_no_alternatif" readOnly=true class="form-control"  value="<?php echo isset($edit['mn_no_alternatif']) ? $edit['mn_no_alternatif'] : $id_nasabah ?>">
             </div>
             <div class="form-group">
               <label>Nama Alias</label>
