@@ -50,6 +50,7 @@ class UserDB extends CI_Model {
 
 	function check_remember_token($post)
 	{
+		$this->db->select('usr_remember_token');
 		$this->db->where('usr_id',$post['usr_id']);
 		$this->db->where('usr_remember_token',$post['remember_token']);
 		$res = $this->db->get('users');
