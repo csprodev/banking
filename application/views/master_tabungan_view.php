@@ -22,7 +22,7 @@
               <div class="form-group">
                 <label>No Rekening</label>
                 <input type="hidden" name="mt_id" value="<?php echo isset($edit['mt_id']) ? $edit['mt_id'] : '' ?>"></input>
-                <input type="text" name="mt_no_rekening" readOnly=true class="form-control" value="<?php echo isset($edit['mt_no_rekening']) ? $edit['mt_no_rekening'] : '' ?>" required>
+                <input type="text" name="mt_no_rekening" readOnly=true class="form-control" value="<?php echo isset($edit['mt_no_rekening']) ? $edit['mt_no_rekening'] : 'bcs000000122016' ?>" required>
               </div>
               <div class="form-group">
                 <label>ID Nasabah</label>

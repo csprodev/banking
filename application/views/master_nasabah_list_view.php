@@ -37,12 +37,13 @@
                 <th>No Alternatif</th>
                 <th>Nama Nasabah</th>
                 <th>Nama Alias</th>
-                <th >Nama Ibu Kandung</th>
+                <th>Nama Ibu Kandung</th>
                 <th>Jenis Kelamin</th>
                 <th>Alamat Nasabah</th>
                 <th>Tempat Lahir</th>
                 <th>Tanggal Lahir</th>
                 <th>Jenis Identitas</th>
+                <th>Nomer Identitas</th>
               </tr>
             </thead>
             <tbody>
@@ -59,6 +60,7 @@
                   echo "<td>".$data['mn_tempat_lahir']."</td>";
                   echo "<td>".$data['mn_tanggal_lahir']."</td>";
                   echo "<td>".$data['mn_jenis_identitas']."</td>";
+                  echo "<td>".$data['mn_nomor_identitas']."</td>";
                   echo "</tr>";
               }?>
             </tbody>

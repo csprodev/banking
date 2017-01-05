@@ -40,6 +40,10 @@
                 <option value="dll">Lainnya</option>
               </select>
             </div>
+            <div class="form-group">
+              <label>Nomer Identitas</label>
+              <input type="text" name="mn_nomor_identitas" class="form-control" value="<?php echo isset($edit['mn_nomor_identitas']) ? $edit['mn_nomor_identitas'] : '' ?>">
+            </div>
           </div>
           <!-- /.col -->
           <div class="col-md-6">

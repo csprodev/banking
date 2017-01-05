@@ -25,7 +25,7 @@
             <div class="form-group">
               <label>No Rekening</label>
               <input type="hidden" name="mk_id" value="<?php echo isset($edit['mk_id']) ? $edit['mk_id'] : '' ?>">
-              <input type="text" name="mk_no_rekening" class="form-control" value="<?php echo isset($edit['mk_no_rekening']) ? $edit['mk_no_rekening'] : '' ?>">
+              <input type="text" readOnly=true name="mk_no_rekening" class="form-control" value="<?php echo isset($edit['mk_no_rekening']) ? $edit['mk_no_rekening'] : 'bcs000000122016' ?>">
             </div>
             <div class="form-group">
               <label>Nasabah</label>
