@@ -12,6 +12,7 @@
   <div class="box box-default">
     <!-- /.box-header -->
     <div class="box-body">
+      <?php echo form_open_multipart("master_nasabah/$action", array('id' => 'dischargeform'));?>
       <form id="dischargeform" action="<?php echo base_url().'master_nasabah/'.$action; ?>" method="post">
         <div class="row">
           <div class="col-md-6">
@@ -25,37 +26,9 @@
               <input type="text" name="mn_nama_nasabah" class="form-control" value="<?php echo isset($edit['mn_nama_nasabah']) ? $edit['mn_nama_nasabah'] : '' ?>">
             </div>
             <div class="form-group">
-              <label>Nama Ibu Kandung</label>
-              <input type="text" name="mn_nama_ibu_kandung" class="form-control" value="<?php echo isset($edit['mn_nama_ibu_kandung']) ? $edit['mn_nama_ibu_kandung'] : '' ?>">
-            </div>
-            <div class="form-group">
-              <label>Alamat Nasabah</label>
-              <textarea name="mn_alamat_nasabah" class="form-control" rows="3"></textarea>
-            </div>
-            <div class="form-group">
-              <label>Jenis Identitas</label>
-              <select name="mn_jenis_identitas" class="form-control select2" style="width: 100%;">
-                <option value="sim" selected="selected">Sim</option>
-                <option value="ktp">Ktp</option>
-                <option value="dll">Lainnya</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Nomer Identitas</label>
-              <input type="text" name="mn_nomor_identitas" class="form-control" value="<?php echo isset($edit['mn_nomor_identitas']) ? $edit['mn_nomor_identitas'] : '' ?>">
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>No Alternatif</label>
-              <input type="text" name="mn_no_alternatif" readOnly=true class="form-control"  value="<?php echo isset($edit['mn_no_alternatif']) ? $edit['mn_no_alternatif'] : $id_nasabah ?>">
-            </div>
-            <div class="form-group">
               <label>Nama Alias</label>
               <input type="text" name="mn_nama_alias" class="form-control"  value="<?php echo isset($edit['mn_nama_alias']) ? $edit['mn_nama_alias'] : '' ?>">
             </div>
-
             <div class="form-group">
             <label>Jenis Kelamin</label>
               <div class="row">
@@ -83,6 +56,29 @@
               </div>
             </div>
             <div class="form-group">
+              <label>Nama Ibu Kandung</label>
+              <input type="text" name="mn_nama_ibu_kandung" class="form-control" value="<?php echo isset($edit['mn_nama_ibu_kandung']) ? $edit['mn_nama_ibu_kandung'] : '' ?>">
+            </div>
+            <div class="form-group">
+              <label>Alamat Nasabah</label>
+              <textarea name="mn_alamat_nasabah" class="form-control" rows="3"></textarea>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Jenis Identitas</label>
+              <select name="mn_jenis_identitas" class="form-control select2" style="width: 100%;">
+                <option value="sim" selected="selected">Sim</option>
+                <option value="ktp">Ktp</option>
+                <option value="dll">Lainnya</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Nomor Identitas</label>
+              <input type="text" name="mn_nomor_identitas" class="form-control" value="<?php echo isset($edit['mn_nomor_identitas']) ? $edit['mn_nomor_identitas'] : '' ?>">
+            </div>
+            <div class="form-group">
               <label>Tempat Lahir</label>
               <input type="text" name="mn_tempat_lahir" class="form-control"  value="<?php echo isset($edit['mn_tempat_lahir']) ? $edit['mn_tempat_lahir'] : '' ?>">
             </div>
@@ -96,12 +92,20 @@
                 <input type="text" name="mn_tanggal_lahir" class="form-control pull-right" id="datepicker" value="<?php echo isset($edit['mn_tanggal_lahir']) ? $edit['mn_tanggal_lahir'] : '' ?>">
               </div>
             </div>
+            <div class="form-group" style="margin-bottom:20px">
+              <label for="exampleInputFile">Upload Foto Nasabah</label>
+              <input type="file" id="image" name="image">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputFile">Upload Foto KTP Nasabah</label>
+              <!-- <input type="file" id="mn_foto_ktp_nasabah" name="mn_foto_ktp_nasabah"> -->
+            </div>
             <!-- /.form-group -->
           </div>
           <!-- /.col -->
         </div>
         <div class="box-footer">
-          <button type="submit" class="btn btn-primary" style="margin-left:-9px"><?php echo isset($edit['mn_id']) ? 'Update Data Nasabah' : 'Simpan Registrasi Nasabah' ?></button>
+          <button type="submit" class="file" style="margin-left:-9px"><?php echo isset($edit['mn_id']) ? 'Update Data Nasabah' : 'Simpan Registrasi Nasabah' ?></button>
           <!-- <button type="button" class="btn btn-danger">Batalkan Registrasi</button> -->
         </div>
       </form>
@@ -157,5 +161,10 @@
          });
       }
     });
+
+    // var ext = $('#my_file_field').val().split('.').pop().toLowerCase();
+    // if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+    //     alert('invalid extension!');
+    // }
   });
 </script>

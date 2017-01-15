@@ -57,8 +57,53 @@ class Master_nasabah extends CI_Controller
 	public function save()
 	{
 		$data = $this->input->post();
+		// $path_foto_nasabah = base_url()."assets/images/foto_nasabah/";
+		$path_foto_nasabah = "assets/images/foto_nasabah";
+		$path_ktp = base_url()."assets/images/ktp_nasabah";
+		$img = 'image';
+
+
 		$data['mn_tanggal_lahir'] = date_format(date_create($data['mn_tanggal_lahir']),'Y-m-d');
-		unset($data['mt_id']);
+		unset($data['mn_id']);
+
+		$data['mn_foto_nasabah'] = $_FILES['mn_foto_nasabah']['name'];
+		// $data['mn_foto_ktp_nasabah'] = $_FILES['mn_foto_ktp_nasabah']['name'];
+		$config['upload_path'] = $path_foto_nasabah;
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '100000';
+
+		if(!empty($data['mn_foto_nasabah']))
+		{
+			$this->load->library('upload', $config);
+
+			if (!$this->upload->do_upload($img))
+			{
+				$error = array('error' => $this->upload->display_errors());
+				print_r($error); exit;
+				// $this->load->view('upload_form', $error);
+			}
+			else
+			{
+				$image = array('upload_data' => $this->upload->data());
+			}
+		}
+
+		if(!empty($data['mn_foto_nasabah']))
+		{
+			$config['upload_path'] = $path_ktp;
+			$this->load->library('upload', $config);
+	
+			if (!$this->upload->do_upload($data['mn_foto_nasabah']))
+			{
+				$error = array('error' => $this->upload->display_errors());
+				print_r($error); exit;
+				// $this->load->view('upload_form', $error);
+			}
+			else
+			{
+				$image = array('upload_data' => $this->upload->data());
+			}
+		}
 		
 		$save = $this->get_db->do_save($data);
 
@@ -102,6 +147,15 @@ class Master_nasabah extends CI_Controller
 
 		$id_nasabah = $new_index_nasabah.$class.$year.$random;
 		return $id_nasabah;
+	}
+
+	public function check_upload($files)
+	{
+		echo '<pre>';
+		foreach ($files as $key => $value)
+		{
+			print_r(strpos($value['type'], 'image')); exit;
+		}
 	}
 
 }
