@@ -16,10 +16,11 @@ class Master_tabungan extends CI_Controller
 	public function index($params = null)
 	{
 		$userdata = $this->userdb->getLoginInfo($this->session->userdata('user'));
-
+		$menu = $this->userdb->get_menu($userdata);
 		// $no_rekening = $this->no_rekening();
 		$data = array(
 			'link' => 'master_tabungan_view.php',
+			'menu' => $menu,
 			'userdata' => $userdata,
 			'edit' => '',
 			'edit_mode' => false,

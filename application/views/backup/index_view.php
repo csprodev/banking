@@ -281,7 +281,7 @@
         </div>
       </div>
       <!-- search form -->
- <!--      <form action="#" method="get" class="sidebar-form">
+      <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
@@ -289,41 +289,12 @@
                 </button>
               </span>
         </div>
-      </form> -->
+      </form>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <?php
-          if(!empty($menu))
-          {
-            foreach ($menu as $mkey => $menus) 
-            {
-              if($menus['sm_is_parent'] == 1)
-              {
-                $m  = "<li class='treeview '".strtolower($menus['sm_title']).">";
-                $m .= "<a href='".$menus['sm_controller']."'><i class='".$menus['sm_icon']."'></i> <span>".$menus['sm_title']."</span>";
-                $m .= "<span class='pull-right-container'>";
-                $m .= "<i class='fa fa-angle-left pull-right'></i>";
-                $m .= "</span>";
-                $m .= "</a>";
-                $m .= "<ul class='treeview-menu'>";
-                foreach($menus['sm_child'] as $ckey => $child)
-                {
-                  $m .= "<li class='".strtolower($child['sm_title'])."'><a href='".$child['sm_controller']."'><i class='".$child['sm_icon']."'></i>".$child['sm_title']."</a></li>";
-                }
-                $m .= "</ul>";
-                $m .= "</li>";
-
-                echo $m;
-              }
-              else
-              {
-                echo  "<li class='active dashboard'><a href='".$menus['sm_controller']."'><i class='".$menus['sm_icon']."'></i><span>".$menus['sm_title']."</a></li>";
-              }
-            }
-          }
-        ?>
-       <!--  <li class="treeview" id="">
+        <li class="active dashboard"><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i><span>Dashboard</a></li>
+        <li class="treeview" id="">
           <a href="#">
             <i class="fa fa-book"></i>
             <span>Registrasi</span>
@@ -381,7 +352,7 @@
             <li class="angsuran_pinjaman"><a href="<?php echo base_url(); ?>mutasi_kas"><i class="fa fa-circle-o"></i>Mutasi Kas</a></li>
           </ul>
         </li>
-        <li class="treeview upload_data"><a href="<?php echo base_url(); ?>upload"><i class="fa fa-book"></i> <span>Upload Data</span></a></li> -->
+        <li class="treeview upload_data"><a href="<?php echo base_url(); ?>upload"><i class="fa fa-book"></i> <span>Upload Data</span></a></li>
         <!-- <li class="treeview menu_browse_data_master"><a href="<?php echo base_url(); ?>log_out"><i class="fa fa-book"></i> <span>Keluar Aplikasi</span></a></li> -->
       </ul>
     </section>

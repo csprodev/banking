@@ -59,4 +59,31 @@ class UserDB extends CI_Model {
 			return null;
 	}
 
+	function get_menu($params)
+	{
+		$menu = array();
+		$this->db->select('*');
+		$this->db->where('sm_user_id', $params);
+		$this->db->where('(sm_is_child is null or sm_is_child = 0)');
+		$this->db->order_by('sm_order', 'asc');
+
+		$data_parent =  $this->db->get('sys_menu')->result_array();
+
+		if($data_parent != null)
+		{
+			foreach ($data_parent as $key => $value) 
+			{
+				$menu[] = $value; 				
+				$child = $this->db->query("select * from sys_menu where sm_id_parent = '".$value['sm_id']."'")->result_array();
+				
+				if(!empty($child))
+				{
+					$menu[$key]['sm_child'] = $child;
+				}
+			}
+		}
+
+		return $menu;
+	}
+
 }
