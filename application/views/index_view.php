@@ -102,6 +102,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="active dashboard"><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i><span>Dashboard</a></li>
+        <li class="coa"><a href="<?php echo base_url(); ?>daftar_akun"><i class="fa fa-book"></i><span>Daftar Akun</a></li>
         <li class="treeview" id="">
           <a href="#">
             <i class="fa fa-book"></i>
