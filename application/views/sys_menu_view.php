@@ -8,7 +8,7 @@
 
 <section class="content-header">
   <h1>
-    List Master Nasabah
+    Sys Menu
   </h1>
 </section>
 <!-- Main content -->
@@ -18,7 +18,7 @@
       <div class="box">
         <!-- /.box-header -->
         <div class="margin">
-          <a href="<?php echo base_url(); ?>master_nasabah" class="btn btn-app">
+          <a href="<?php echo base_url(); ?>sys_menu" class="btn btn-app">
             <i class="fa fa-plus"></i>Add
           </a>
           <a id="editButton" class="btn btn-app">
@@ -33,35 +33,34 @@
             <thead>
               <tr>
                 <th hidden="true"></th>
-                <th>ID Nasabah</th>
-                <th>No Alternatif</th>
-                <th>Nama Nasabah</th>
-                <th>Nama Alias</th>
-                <th>Nama Ibu Kandung</th>
-                <th>Jenis Kelamin</th>
-                <th>Alamat Nasabah</th>
-                <th>Tempat Lahir</th>
-                <th>Tanggal Lahir</th>
-                <th>Jenis Identitas</th>
-                <th>Nomer Identitas</th>
+                <th>No</th>
+                <?php
+                foreach ($column_table as $key => $data) 
+                {
+                  if($data['COLUMN_NAME'] != 'sm_id')
+                    echo "<th>".str_replace('_', ' ', substr($data['COLUMN_NAME'], 3))."</th>";
+                }
+                ?>
               </tr>
             </thead>
             <tbody>
-              <?php foreach($list_data as $data){ 
-                    echo "<tr>";
-                  echo "<td hidden='true'>".$data['mn_id']."</td>";
-                  echo "<td>".$data['mn_id_nasabah']."</td>";
-                  echo "<td>".$data['mn_no_alternatif']."</td>";
-                  echo "<td>".$data['mn_nama_nasabah']."</td>";
-                  echo "<td>".$data['mn_nama_alias']."</td>";
-                  echo "<td>".$data['mn_nama_ibu_kandung']."</td>";
-                  echo "<td>".$data['mn_jekel']."</td>";
-                  echo "<td>".$data['mn_alamat_nasabah']."</td>";
-                  echo "<td>".$data['mn_tempat_lahir']."</td>";
-                  echo "<td>".$data['mn_tanggal_lahir']."</td>";
-                  echo "<td>".$data['mn_jenis_identitas']."</td>";
-                  echo "<td>".$data['mn_nomor_identitas']."</td>";
+              <?php 
+                $no = 1;
+                foreach($list_data as $data){ 
+                  echo "<tr>";
+                  echo "<td hidden='true'>".$data['sm_id']."</td>";
+                  echo "<td>".$no."</td>";
+                  echo "<td>".$data['sm_title']."</td>";
+                  echo "<td>".$data['sm_user_id']."</td>";
+                  echo "<td>".$data['sm_is_child']."</td>";
+                  echo "<td>".$data['sm_controller']."</td>";
+                  echo "<td>".$data['sm_icon']."</td>";
+                  echo "<td>".$data['sm_id_parent']."</td>";
+                  echo "<td>".$data['sm_order']."</td>";
+                  echo "<td>".$data['sm_is_parent']."</td>";
+                  echo "<td>".$data['sm_is_active']."</td>";
                   echo "</tr>";
+                  $no++;
               }?>
             </tbody>
             <tfoot>
@@ -100,19 +99,19 @@
       if(!params) {
         alert('Select row first!');
       } else {
-        location.href = "<?php echo base_url(); ?>master_nasabah/index/" + params[0]; 
+        location.href = "<?php echo base_url(); ?>sys_menu/index/" + params[0]; 
       }
     });
 
     $('#deleteButton').click( function (){
       var params = table.row('.selected').data();
 
-      if(!params) {
+      if(!params) { 
         alert('Select row first !');
       } else {
         if (confirm("Are you sure?")) {
           $.ajax({
-            url: "<?php echo base_url().'master_nasabah/delete/'; ?>"+params[0],
+            url: "<?php echo base_url().'sys_menu/delete/'; ?>"+params[0],
             context: document.body,
             success:function(res) {
 

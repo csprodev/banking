@@ -191,12 +191,21 @@
     });
 
     $('#tambah').on('show.bs.modal', function(e) {
-      console.log('abcdefg');
+      var url = "<?php echo base_url().'transaksi_jurnal/ref_kode_perkiraan'; ?>";
+
+      $.ajax({
+          type: "POST",
+          url: url,
+          cache: false,
+          success: function(result){
+            document.getElementById("tj_kode_perkiraan").innerHTML = result;
+          }
+        });
     });
 
     $("select").change(function(){
       var currentId = $(this).attr("id");
-      var url = "<?php echo base_url().'transaksi_jurnal/get_ref_kode_perkiraan'; ?>";
+      var url = "<?php echo base_url().'transaksi_jurnal/ref_kode_perkiraan'; ?>";
       
       if(currentId == 'kategori_perawatan'){
         kp_val = $(this).val();
@@ -210,6 +219,7 @@
           data: send_data,
           cache: false,
           success: function(result){
+            
             document.getElementById("type_perawatan").innerHTML = result;
           }
         });

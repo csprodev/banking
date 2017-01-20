@@ -1,29 +1,27 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Master_nasabah extends CI_Controller 
+class Sys_menu extends CI_Controller 
 {
 
 	public function __construct()
     {
         parent::__construct();
         $this->load->model('userdb');
-        $this->load->model('master_nasabah_model', 'get_db');
+        $this->load->model('sys_menu_model', 'get_db');
     }
 
-	public function index($params = null)
+	public function index2($params = null)
 	{
 		$userdata = $this->userdb->getLoginInfo($this->session->userdata('user'));
 		$menu = $this->userdb->get_menu($userdata);
-		$id_nasabah = $this->id_nasabah();
 
 		$data = array(
 			'menu' => $menu,
-			'link' => 'master_nasabah_view.php',
+			'link' => 'sys_menu_view.php',
 			'userdata' => $userdata,
 			'edit' => '',
 			'edit_mode' => false,
-			'action' => 'save',
-			'id_nasabah' => $id_nasabah
+			'action' => 'save'
 		);
 
 		if(!empty($params))
@@ -41,15 +39,19 @@ class Master_nasabah extends CI_Controller
 		$this->load->view('index_view', $data);
 	}
 
-	public function list_data()
+	public function index()
 	{
 		$list_data = $this->get_db->do_read();
 		$userdata = $this->userdb->getLoginInfo($this->session->userdata('user'));
+		$menu = $this->userdb->get_menu($userdata->usr_id);
+		$column_table = $this->get_db->do_get_column_table();
 
 		$data = array(
-			'link' => 'master_nasabah_list_view.php',
+			'menu' => $menu,
+			'link' => 'sys_menu_view.php',
 			'userdata' => $userdata,
-			'list_data' => $list_data
+			'list_data' => $list_data,
+			'column_table' => $column_table
 		);
 
 		$this->load->view('index_view', $data);
@@ -108,7 +110,7 @@ class Master_nasabah extends CI_Controller
 		
 		$save = $this->get_db->do_save($data);
 
-		redirect("master_nasabah");
+		redirect("sys_menu");
 	}
 
 	public function edit()
@@ -119,7 +121,7 @@ class Master_nasabah extends CI_Controller
 		unset($data['mn_id']);
 
 		$edit = $this->get_db->do_edit($data, $id);
-		redirect("master_nasabah/list_data");
+		redirect("sys_menu/list_data");
 	}
 
 	public function delete($params)

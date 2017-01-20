@@ -36,4 +36,9 @@ class Master_nasabah_model extends CI_Model
 		return $this->db->delete('master_nasabah');
 	}
 
+	public function get_idx_nasabah()
+	{
+		return $this->db->query('select substring(mn_id_nasabah, 1,6) as index_nasabah from master_nasabah ORDER BY substring(mn_id_nasabah, 1,6) desc;')->row_array();
+	}
+
 }

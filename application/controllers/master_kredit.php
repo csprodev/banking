@@ -13,6 +13,8 @@ class Master_kredit extends CI_Controller
 	public function index($params = null)
 	{
 		$userdata = $this->userdb->getLoginInfo($this->session->userdata('user'));
+		$menu = $this->userdb->get_menu($userdata);
+		
 		$data = array(
 			'link' => 'master_kredit_view.php',
 			'userdata' => $userdata,
