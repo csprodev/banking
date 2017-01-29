@@ -10,36 +10,7 @@ class Sys_menu extends CI_Controller
         $this->load->model('sys_menu_model', 'get_db');
     }
 
-	public function index2($params = null)
-	{
-		$userdata = $this->userdb->getLoginInfo($this->session->userdata('user'));
-		$menu = $this->userdb->get_menu($userdata);
-
-		$data = array(
-			'menu' => $menu,
-			'link' => 'sys_menu_view.php',
-			'userdata' => $userdata,
-			'edit' => '',
-			'edit_mode' => false,
-			'action' => 'save'
-		);
-
-		if(!empty($params))
-		{
-			$edit = $this->get_db->do_read_row($params);
-			
-			if(!empty($edit))
-			{
-				$data['edit'] = $edit;
-				$data['edit_mode'] = true;
-				$data['action'] = 'edit';
-			} 
-		}
-
-		$this->load->view('index_view', $data);
-	}
-
-	public function index()
+	public function index($params = null)
 	{
 		$list_data = $this->get_db->do_read();
 		$userdata = $this->userdb->getLoginInfo($this->session->userdata('user'));
@@ -54,62 +25,49 @@ class Sys_menu extends CI_Controller
 			'column_table' => $column_table
 		);
 
+
 		$this->load->view('index_view', $data);
+	}
+
+	public function data_edit($params = null)
+	{
+		$edit = array();
+
+		if(!empty($params))
+		{
+			$edit = $this->get_db->do_read_row($params);
+
+			// if($edit['fm_is_child'] == 1)
+				// $edit['fm_title'] = 
+		}
+
+		echo json_encode($edit);
 	}
 
 	public function save()
 	{
 		$data = $this->input->post();
-		// $path_foto_nasabah = base_url()."assets/images/foto_nasabah/";
-		$path_foto_nasabah = "assets/images/foto_nasabah";
-		$path_ktp = base_url()."assets/images/ktp_nasabah";
-		$img = 'image';
+		unset($data['btnSave']);
 
+		$prefix_data = array();
 
-		$data['mn_tanggal_lahir'] = date_format(date_create($data['mn_tanggal_lahir']),'Y-m-d');
-		unset($data['mn_id']);
-
-		$data['mn_foto_nasabah'] = $_FILES['mn_foto_nasabah']['name'];
-		// $data['mn_foto_ktp_nasabah'] = $_FILES['mn_foto_ktp_nasabah']['name'];
-		$config['upload_path'] = $path_foto_nasabah;
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '100000';
-
-		if(!empty($data['mn_foto_nasabah']))
+		foreach ($data as $key => $value) 
 		{
-			$this->load->library('upload', $config);
+			if($key == 'is_active' || $key == 'is_child')
+			{
+				if($value == 'on') $value = 1;
+				else $value = 0;
 
-			if (!$this->upload->do_upload($img))
-			{
-				$error = array('error' => $this->upload->display_errors());
-				print_r($error); exit;
-				// $this->load->view('upload_form', $error);
+				if($key == 'is_child')
+				{
+					if($value == 0) $prefix_data['sm_is_parent'] = 1;
+					else $prefix_data['sm_is_parent'] = 0;
+				}
 			}
-			else
-			{
-				$image = array('upload_data' => $this->upload->data());
-			}
+			$prefix_data['sm_'.$key] = $value;
 		}
 
-		if(!empty($data['mn_foto_nasabah']))
-		{
-			$config['upload_path'] = $path_ktp;
-			$this->load->library('upload', $config);
-	
-			if (!$this->upload->do_upload($data['mn_foto_nasabah']))
-			{
-				$error = array('error' => $this->upload->display_errors());
-				print_r($error); exit;
-				// $this->load->view('upload_form', $error);
-			}
-			else
-			{
-				$image = array('upload_data' => $this->upload->data());
-			}
-		}
-		
-		$save = $this->get_db->do_save($data);
-
+		$save = $this->get_db->do_save($prefix_data);
 		redirect("sys_menu");
 	}
 
@@ -154,6 +112,7 @@ class Sys_menu extends CI_Controller
 
 	public function check_upload($files)
 	{
+		echo 'saasa'; exit;
 		echo '<pre>';
 		foreach ($files as $key => $value)
 		{
@@ -164,7 +123,6 @@ class Sys_menu extends CI_Controller
 	public function get_parent()
 	{
 		$data = $this->get_db->do_get_parent();
-
 		echo json_encode($data);
 	}
 

@@ -20,7 +20,6 @@ class Sys_menu_model extends CI_Model
 
 	public function do_save($data)
 	{
-		$data['mn_no_rekening'] = '0901010';
 		return $this->db->insert('sys_menu',$data);
 	}
 

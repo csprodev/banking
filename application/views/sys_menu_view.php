@@ -22,7 +22,7 @@
       <div class="box">
         <!-- /.box-header -->
         <div class="margin">
-          <button type="button" class="btn btn-app" data-toggle="modal" data-target="#form_user"><i class="fa fa-plus"></i>Add</button>
+          <button type="button" class="btn btn-app" data-toggle="modal" data-target="#modal_menu"><i class="fa fa-plus"></i>Add</button>
           <a id="editButton" class="btn btn-app">
             <i class="fa fa-edit"></i> Edit
           </a>
@@ -81,25 +81,25 @@
     <!-- /.col -->
   </div>
   <!-- /.row -->
-  <div class="modal fade form_user" id="form_user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade modal_menu" id="modal_menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" style="width:700px">
       <div class="modal-content">
-      <form method="post" role="form" action="sys_menu/save">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Form User</h4>
-        </div>
-        <div class="modal-body">
+        <form method="post" id="form_menu" role="form" action="sys_menu/save">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Form User</h4>
+          </div>
+          <div class="modal-body">
             <div class="box-body">
               <div class="row">
                 <div class="form-group">
                   <label for="title">Title</label>
-                  <input type="text" class="form-control" id="title" name="title"  value="">
+                  <input type="text" class="form-control" id="title" name="title"  value="" required>
                   <input type="hidden" class="form-control" id="id" name="id">
                 </div>
                 <div class="form-group">
                   <label for="controller">Controller</label>
-                  <input type="text" class="form-control" id="controller" name="controller" value="">
+                  <input type="text" class="form-control" id="controller" name="controller" value="" >
                 </div>
                 <div class="form-group">
                   <label for="icon">Icon</label>
@@ -110,33 +110,35 @@
                   <input type="text" class="form-control" id="order" name="order" value="">
                 </div>
                 <div class="form-group">
-                  <label for="is_active">Is Active</label> <br/>
+                  <label for="is_active">Is Active</label><br/>
                   <label>
-                    <input type="checkbox"  class="flat-red" >
+                    <input type="checkbox" name="is_active"  class="flat-red" checked>
                   </label>
                 </div>
                 <div class="form-group">
-                  <label for="is_child">Is Child</label> <br/>
+                  <label for="is_parent">Is Parent</label><br/>
                   <label>
-                    <input id="is_child" type="checkbox"  class="flat-red" checked>
+                    <input id="is_parent" name="is_parent" type="checkbox"  class="flat-red">
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label for="is_child">Is Child</label><br/>
+                  <label>
+                    <input id="is_child" name="is_child" type="checkbox"  class="flat-red">
                   </label>
                 </div>
                 <div class="form-group">
                   <label>Parent</label>
-                  <select id="is_parent" class="form-control select2" style="width: 100%;" disabled>
+                  <select id="id_parent" name="id_parent" class="form-control select2" style="width: 100%;" disabled>
                     <option>---</option>
-                    </select>
+                  </select>
                 </div>
               </div>
             </div>
-            <!-- <div class="box-footer">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div> -->
-          
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary btnSubmitSetor" name="btnSubmitSetor">Save</button>
+            <button type="button" id="btn_cancel" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" name="btnSave">Save</button>
           </div>
         </form>
       </div>
@@ -148,7 +150,6 @@
 <script src="<?php echo base_url(); ?>assets/plugins/select2/select2.full.min.js"></script>
 
 <script>
-
   $(function () {
     $(".select2").select2({
       ajax: {
@@ -176,11 +177,11 @@
     });
 
     $('input:checkbox[id=is_child]').on('ifChecked', function(event){
-      $("select[id=is_parent]").attr('disabled', false);
+      $("select[id=id_parent]").attr('disabled', false);
     });
 
     $('input:checkbox[id=is_child]').on('ifUnchecked', function(event){
-      $("select[id=is_parent]").attr('disabled', true);
+      $("select[id=id_parent]").attr('disabled', true);
     });
 
     var table = $('#grid').DataTable({
@@ -208,7 +209,44 @@
       if(!params) {
         alert('Select row first!');
       } else {
-        location.href = "<?php echo base_url(); ?>sys_menu/index/" + params[0]; 
+        $.ajax({
+          url: "<?php echo base_url().'sys_menu/data_edit/'; ?>"+params[0],
+          context: document.body,
+          success:function(res) {
+            if(res == 'success'){
+              table.row('.selected').remove().draw( false );
+            } else {
+              var data = jQuery.parseJSON(res);
+              $('#title').val(data.sm_title);
+              $('#controller').val(data.sm_controller);
+              $('#icon').val(data.sm_icon);
+              $('#order').val(data.sm_order);
+
+              if(data.sm_is_parent == 1){
+                $('input:checkbox[id=is_parent]').attr('checked', true).iCheck('update');
+              } else {
+                $('input:checkbox[id=is_parent]').removeAttr('checked', true).iCheck('update');
+              }
+
+              if(data.sm_is_child == 1){
+                $('input:checkbox[id=is_child]').attr('checked', true).iCheck('update');
+                $("select[id=id_parent]").attr('disabled', false);
+              } else {
+                $('input:checkbox[id=is_child]').removeAttr('checked', true).iCheck('update');
+                $("select[id=id_parent]").attr('disabled', true);
+              }
+
+              if(data.sm_is_active == 1){
+                $('input:checkbox[id=is_active]').attr('checked', true).iCheck('update');
+              } else {
+                $('input:checkbox[id=is_active]').removeAttr('checked', true).iCheck('update');
+              }
+
+              $('#modal_menu').modal('toggle');
+              $('#modal_menu').modal('show');
+            }
+          }
+        });
       }
     });
 
@@ -223,7 +261,6 @@
             url: "<?php echo base_url().'sys_menu/delete/'; ?>"+params[0],
             context: document.body,
             success:function(res) {
-
               if(res == 'success'){
                 table.row('.selected').remove().draw( false );
               } else {
@@ -235,5 +272,13 @@
         return false;
       }
     });
+
+    $("#btn_cancel").click(function() {
+      $(this).closest('form').find("input", "#form_menu").val("").removeAttr('checked').removeAttr('selected');
+      $('input:checkbox[id=is_parent]').removeAttr('checked', false).iCheck('update');
+      $('input:checkbox[id=is_child]').removeAttr('checked', false).iCheck('update');
+      $("select[id=id_parent]").attr('disabled', true);
+    });
+
   });
 </script>
