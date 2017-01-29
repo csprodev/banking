@@ -110,6 +110,16 @@ class Browse_data_master extends CI_Controller {
 		
 		$this->load->view('index_view', $data);
 	}
+
+	public function print_pdf()
+	{
+		require_once 'assets/plugins/mpdf60/mpdf.php';
+
+		$mpdf=new mPDF('c','A4','','' , 0 , 0 , 0 , 0 , 0 , 0);
+		// $mpdf->WriteHTML('<h1>Hello world!</h1>');
+		$mpdf->WriteHTML(file_get_contents('application/views/pdf/bukti_setor.php'));
+		$mpdf->Output();
+	}
 	
 }
 
