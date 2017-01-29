@@ -323,66 +323,6 @@
             }
           }
         ?>
-       <!--  <li class="treeview" id="">
-          <a href="#">
-            <i class="fa fa-book"></i>
-            <span>Registrasi</span>
-            <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>master_nasabah"><i class="fa fa-circle-o"></i>Master Nasabah</a></li>
-            <li><a href="<?php echo base_url(); ?>master_tabungan"><i class="fa fa-circle-o"></i>Master Tabungan</a></li>
-            <li><a href="<?php echo base_url(); ?>master_kredit"><i class="fa fa-circle-o"></i>Master Kredit</a></li>
-            <li><a href="<?php echo base_url(); ?>master_nasabah/list_data"><i class="fa fa-circle-o"></i>List Master Nasabah</a></li>
-            <li><a href="<?php echo base_url(); ?>master_tabungan/list_data"><i class="fa fa-circle-o"></i>List Master Tabungan</a></li>
-            <li><a href="<?php echo base_url(); ?>master_kredit/list_data"><i class="fa fa-circle-o"></i>List Master Kredit</a></li>
-          </ul>
-        </li>
-        <li class="treeview browse_data_master">
-          <a href="<?php echo base_url(); ?>browse_data_master"><i class="fa fa-book"></i> <span>Browse Data Master</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="tabungan"><a href="<?php echo base_url(); ?>browse_data_master/tabungan"><i class="fa fa-circle-o"></i> Tabungan</a></li>
-            <li class="kredit"><a href="<?php echo base_url(); ?>browse_data_master/kredit"><i class="fa fa-circle-o"></i> Kredit</a></li>
-          </ul>
-        </li>
-        <li class="treeview transaksi">
-          <a href="<?php echo base_url(); ?>"><i class="fa fa-book"></i> <span>Transaksi</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="setoran"><a href="<?php echo base_url(); ?>browse_data_master/trans_tabungan/setoran"><i class="fa fa-circle-o"></i>Setoran Tunai</a></li>
-            <li class="penarikan"><a href="<?php echo base_url(); ?>browse_data_master/trans_tabungan/penarikan"><i class="fa fa-circle-o"></i>Penarikan Tunai</a></li>
-            <li class="angsuran_pinjaman"><a href="<?php echo base_url(); ?>"><i class="fa fa-circle-o"></i>Angsuran Pinjaman</a></li>
-            <li class="transaksi_jurnal"><a href="<?php echo base_url(); ?>transaksi_jurnal"><i class="fa fa-circle-o"></i>Transaksi Jurnal</a></li>
-            <li class="reversal"><a href="<?php echo base_url(); ?>reversal"><i class="fa fa-circle-o"></i>Reversal</a></li>
-            <li class="bagi_hasil"><a href="<?php echo base_url(); ?>bagi_hasil"><i class="fa fa-circle-o"></i>Bagi Hasil</a></li>
-          </ul>
-        </li>
-        <li class="treeview laporan">
-          <a href="<?php echo base_url(); ?>"><i class="fa fa-book"></i> <span>Laporan</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="neraca"><a href="<?php echo base_url(); ?>neraca"><i class="fa fa-circle-o"></i>Neraca</a></li>
-            <li class="laba_rugi"><a href="<?php echo base_url(); ?>laba_rugi"><i class="fa fa-circle-o"></i>Laba Rugi</a></li>
-            <li class="rekening_koran_tabungan"><a href="<?php echo base_url(); ?>rekening_koran_tabungan"><i class="fa fa-circle-o"></i>Rekening Koran Tabungan</a></li>
-            <li class="riwayat_kredit"><a href="<?php echo base_url(); ?>riwayat_kredit"><i class="fa fa-circle-o"></i>Riwayat Kredit</a></li>
-            <li class="jurnal_transaksi"><a href="<?php echo base_url(); ?>jurnal_transaksi"><i class="fa fa-circle-o"></i>Jurnal Transaksi</a></li>
-            <li class="rekap_transaksi"><a href="<?php echo base_url(); ?>rekap_transaksi"><i class="fa fa-circle-o"></i>Rekap Transaksi</a></li>
-            <li class="angsuran_pinjaman"><a href="<?php echo base_url(); ?>mutasi_kas"><i class="fa fa-circle-o"></i>Mutasi Kas</a></li>
-          </ul>
-        </li>
-        <li class="treeview upload_data"><a href="<?php echo base_url(); ?>upload"><i class="fa fa-book"></i> <span>Upload Data</span></a></li> -->
-        <!-- <li class="treeview menu_browse_data_master"><a href="<?php echo base_url(); ?>log_out"><i class="fa fa-book"></i> <span>Keluar Aplikasi</span></a></li> -->
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -600,10 +540,10 @@
   var menu = <?php echo json_encode($menu);?> ;
   $(document).ready(function(){
     $(".sidebar-menu li").removeClass('active');
-    $.each(menu, function(idx, val){
-      console.log(val);
-      $("."+val).addClass('active');
-    });
+    // $.each(menu, function(idx, val){
+    //   console.log(val);
+    //   $("."+val).addClass('active');
+    // });
   });
 </script>
 

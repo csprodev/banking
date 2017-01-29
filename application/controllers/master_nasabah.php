@@ -13,7 +13,7 @@ class Master_nasabah extends CI_Controller
 	public function index($params = null)
 	{
 		$userdata = $this->userdb->getLoginInfo($this->session->userdata('user'));
-		$menu = $this->userdb->get_menu($userdata);
+		$menu = $this->userdb->get_menu($userdata->usr_id);
 		$id_nasabah = $this->id_nasabah();
 
 		$data = array(

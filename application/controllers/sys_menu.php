@@ -161,4 +161,11 @@ class Sys_menu extends CI_Controller
 		}
 	}
 
+	public function get_parent()
+	{
+		$data = $this->get_db->do_get_parent();
+
+		echo json_encode($data);
+	}
+
 }

@@ -41,4 +41,12 @@ class Sys_menu_model extends CI_Model
 		return $this->db->query("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'ibs_branchless' AND TABLE_NAME = 'sys_menu'")->result_array();
 	}
 
+	public function do_get_parent()
+	{
+		$this->db->select('sm_id, sm_title');
+		$this->db->where('sm_id_parent is null');
+		$this->db->where('sm_user_id != 3');
+		return $this->db->get('sys_menu')->result_array();
+	}
+
 }
