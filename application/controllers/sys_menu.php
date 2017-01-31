@@ -47,9 +47,23 @@ class Sys_menu extends CI_Controller
 	public function save()
 	{
 		$data = $this->input->post();
-		unset($data['btnSave']);
-
 		$prefix_data = array();
+		$scope = $data['is_scope'];
+
+		unset($data['id']);
+		unset($data['btnSave']);
+		unset($data['is_scope']);
+
+		if($scope == 'is_parent')
+		{
+			$data['is_parent'] = 1;
+			unset($data['id_parent']);
+		} 
+		else 
+		{
+			$data['is_child'] = 1;
+		}
+
 
 		foreach ($data as $key => $value) 
 		{
@@ -57,13 +71,8 @@ class Sys_menu extends CI_Controller
 			{
 				if($value == 'on') $value = 1;
 				else $value = 0;
-
-				if($key == 'is_child')
-				{
-					if($value == 0) $prefix_data['sm_is_parent'] = 1;
-					else $prefix_data['sm_is_parent'] = 0;
-				}
 			}
+
 			$prefix_data['sm_'.$key] = $value;
 		}
 
@@ -112,7 +121,6 @@ class Sys_menu extends CI_Controller
 
 	public function check_upload($files)
 	{
-		echo 'saasa'; exit;
 		echo '<pre>';
 		foreach ($files as $key => $value)
 		{

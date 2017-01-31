@@ -81,12 +81,11 @@
     <!-- /.col -->
   </div>
   <!-- /.row -->
-  <div class="modal fade modal_menu" id="modal_menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade modal_menu" id="modal_menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document" style="width:700px">
       <div class="modal-content">
         <form method="post" id="form_menu" role="form" action="sys_menu/save">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Form User</h4>
           </div>
           <div class="modal-body">
@@ -109,24 +108,28 @@
                   <label for="order">Order</label>
                   <input type="text" class="form-control" id="order" name="order" value="">
                 </div>
-                <div class="form-group">
-                  <label for="is_active">Is Active</label><br/>
-                  <label>
-                    <input type="checkbox" name="is_active"  class="flat-red" checked>
-                  </label>
+                
+                <div class="row">
+                  <div class="col-lg-3">
+                    <label for="is_active">Is Active</label><br/>
+                    <label>
+                      <input type="checkbox" name="is_active"  class="flat-red" checked>
+                    </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <label for="is_parent">Is Parent</label><br/>
+                    <label>
+                      <input id="is_parent" name="is_scope" type="radio" value="is_parent" class="flat-red" checked>
+                    </label>
+                  </div>
+                  <div class="col-lg-3">
+                    <label for="is_child">Is Child</label><br/>
+                    <label>
+                      <input id="is_child" name="is_scope" type="radio" value="is_child" class="flat-red">
+                    </label>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="is_parent">Is Parent</label><br/>
-                  <label>
-                    <input id="is_parent" name="is_parent" type="checkbox"  class="flat-red">
-                  </label>
-                </div>
-                <div class="form-group">
-                  <label for="is_child">Is Child</label><br/>
-                  <label>
-                    <input id="is_child" name="is_child" type="checkbox"  class="flat-red">
-                  </label>
-                </div>
+
                 <div class="form-group">
                   <label>Parent</label>
                   <select id="id_parent" name="id_parent" class="form-control select2" style="width: 100%;" disabled>
@@ -173,14 +176,15 @@
             }
           };
         }
-      }
+      },
+      minimumResultsForSearch: -1
     });
 
-    $('input:checkbox[id=is_child]').on('ifChecked', function(event){
+    $('input:radio[id=is_child]').on('ifChecked', function(event){
       $("select[id=id_parent]").attr('disabled', false);
     });
 
-    $('input:checkbox[id=is_child]').on('ifUnchecked', function(event){
+    $('input:radio[id=is_child]').on('ifUnchecked', function(event){
       $("select[id=id_parent]").attr('disabled', true);
     });
 
@@ -275,8 +279,8 @@
 
     $("#btn_cancel").click(function() {
       $(this).closest('form').find("input", "#form_menu").val("").removeAttr('checked').removeAttr('selected');
-      $('input:checkbox[id=is_parent]').removeAttr('checked', false).iCheck('update');
-      $('input:checkbox[id=is_child]').removeAttr('checked', false).iCheck('update');
+      $('input:radio[id=is_parent]').prop('checked', true).iCheck('update');
+      $('input:radio[id=is_child]').removeAttr('checked', true).iCheck('update');
       $("select[id=id_parent]").attr('disabled', true);
     });
 
