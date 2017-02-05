@@ -83,9 +83,36 @@ class Sys_menu extends CI_Controller
 	public function edit()
 	{	
 		$data = $this->input->post();
-		$data['mn_tanggal_lahir'] = date_format(date_create($data['mn_tanggal_lahir']),'Y-m-d');
-		$id = $data['mn_id'];
-		unset($data['mn_id']);
+		$id = $data['id'];
+		$scope = $data['is_scope'];
+
+		unset($data['id']);
+		unset($data['btnSave']);
+		unset($data['is_scope']);
+
+		if($scope == 'is_parent')
+		{
+			$data['is_parent'] = 1;
+			unset($data['id_parent']);
+		} 
+		else 
+		{
+			$data['is_child'] = 1;
+		}
+
+
+		foreach ($data as $key => $value) 
+		{
+			if($key == 'is_active' || $key == 'is_child')
+			{
+				if($value == 'on') $value = 1;
+				else $value = 0;
+			}
+
+			$prefix_data['sm_'.$key] = $value;
+		}
+
+		print_r($prefix_data); exit;
 
 		$edit = $this->get_db->do_edit($data, $id);
 		redirect("sys_menu/list_data");
@@ -105,7 +132,7 @@ class Sys_menu extends CI_Controller
 	{
 		$index_nasabah = $this->get_db->get_idx_nasabah();
 
-		if(empty($index_nasabah))
+		if(empty($index_nasabah)) 	
 			$new_index_nasabah = 1;
 		else
 			$new_index_nasabah = $index_nasabah['index_nasabah'] + 1;

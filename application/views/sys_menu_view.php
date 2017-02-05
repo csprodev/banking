@@ -22,7 +22,8 @@
       <div class="box">
         <!-- /.box-header -->
         <div class="margin">
-          <button type="button" class="btn btn-app" data-toggle="modal" data-target="#modal_menu"><i class="fa fa-plus"></i>Add</button>
+          <button id="addButton" type="button" class="btn btn-app" data-toggle="modal" data-target="#modal_menu"><i class="fa fa-plus"></i>Add</button>
+          
           <a id="editButton" class="btn btn-app">
             <i class="fa fa-edit"></i> Edit
           </a>
@@ -113,7 +114,7 @@
                   <div class="col-lg-3">
                     <label for="is_active">Is Active</label><br/>
                     <label>
-                      <input type="checkbox" name="is_active"  class="flat-red" checked>
+                      <input type="checkbox" id="is_active" name="is_active"  class="flat-red" checked>
                     </label>
                   </div>
                   <div class="col-lg-3">
@@ -141,7 +142,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" id="btn_cancel" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary" name="btnSave">Save</button>
+            <button type="submit" id="btn_submit" class="btn btn-primary" name="btnSave">Save</button>
           </div>
         </form>
       </div>
@@ -154,7 +155,7 @@
 
 <script>
   $(function () {
-    $(".select2").select2({
+    var ajaxIdParent = {
       ajax: {
         url: "sys_menu/get_parent",
         dataType: 'json',
@@ -178,7 +179,9 @@
         }
       },
       minimumResultsForSearch: -1
-    });
+    };
+
+    // $(".select2").select2(ajaxIdParent);
 
     $('input:radio[id=is_child]').on('ifChecked', function(event){
       $("select[id=id_parent]").attr('disabled', false);
@@ -208,7 +211,12 @@
       }
     });
 
-    $('#editButton').click( function (){
+    $('#addButton').click(function() {
+      $('#btn_submit').text('Save');
+      $('#form_menu').attr('action', 'sys_menu/edit');
+    });
+
+    $('#editButton').click( function () {
       var params = table.row('.selected').data();
       if(!params) {
         alert('Select row first!');
@@ -221,10 +229,34 @@
               table.row('.selected').remove().draw( false );
             } else {
               var data = jQuery.parseJSON(res);
+              $('#form_menu').attr('action', 'sys_menu/edit');
+              $('#btn_submit').text('Update');
+
+              // $('#id_parent').select2('data', {id: 100, text: 'Lorem Ipsum'});
+              // var data = [{ id: 0, text: 'enhancement'}];
+              //  $(".select2").select2({
+              //   data: data
+              // });
+              
+              // $("#id_parent option").prop('selected', false).filter(function() {
+              //     return $(this).text() == 'Registrasi';  
+              // }).prop('selected', true);
+
+              // $('#id_parent').prop('option', );
+
+              $('#id_parent').append($('<option>', {
+                value: 1,
+                text: 'option'
+              }));
+
+              $("#id_parent option[value=option]").prop("selected", "selected")
+
+              $('#id').val(data.sm_id);
               $('#title').val(data.sm_title);
               $('#controller').val(data.sm_controller);
               $('#icon').val(data.sm_icon);
               $('#order').val(data.sm_order);
+              $("#id_parent").val("thevalue");
 
               if(data.sm_is_parent == 1){
                 $('input:checkbox[id=is_parent]').attr('checked', true).iCheck('update');
@@ -233,15 +265,17 @@
               }
 
               if(data.sm_is_child == 1){
-                $('input:checkbox[id=is_child]').attr('checked', true).iCheck('update');
+                $('input:radio[id=is_child]').prop('checked', true).iCheck('update');
+                $('input:radio[id=is_parent]').removeAttr('checked', true).iCheck('update');
                 $("select[id=id_parent]").attr('disabled', false);
               } else {
+                $('input:radio[id=is_parent]').prop('checked', true).iCheck('update');
                 $('input:checkbox[id=is_child]').removeAttr('checked', true).iCheck('update');
                 $("select[id=id_parent]").attr('disabled', true);
               }
 
               if(data.sm_is_active == 1){
-                $('input:checkbox[id=is_active]').attr('checked', true).iCheck('update');
+                $('input:checkbox[id=is_active]').prop('checked', true).iCheck('update');
               } else {
                 $('input:checkbox[id=is_active]').removeAttr('checked', true).iCheck('update');
               }
@@ -281,6 +315,9 @@
       $(this).closest('form').find("input", "#form_menu").val("").removeAttr('checked').removeAttr('selected');
       $('input:radio[id=is_parent]').prop('checked', true).iCheck('update');
       $('input:radio[id=is_child]').removeAttr('checked', true).iCheck('update');
+
+      $('input:checkbox[id=is_active]').prop('checked', true).iCheck('update');
+
       $("select[id=id_parent]").attr('disabled', true);
     });
 
